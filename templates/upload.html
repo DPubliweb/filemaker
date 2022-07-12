@@ -1,0 +1,87 @@
+
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js" ></script>
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+
+    
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin:0;
+        padding:0;
+        margin-top:-60
+    }
+    #gradient-canvas {
+        --gradient-color-1: #84e3c4;
+        --gradient-color-2: #6b8cf4;
+        --gradient-color-3: #f3bce3;
+        --gradient-color-4: #08c6f6;
+    }
+</style>
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <section class="section_top">
+        <div class="section-container">
+            <div class="section-layout-container container-medium with-padding">
+                <div class="section-layout">
+                    <div class="gradient-area">
+                        <div class="gradient-title-area">
+                        <div class="text text-under text-under-blended section-title-1">Publiweb File Maker</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<form  method="POST" enctype="multipart/form-data">
+    
+    <dl>	
+        <p>
+            <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
+			<input type="text" name="utm" autocomplete="off" required>
+		</p>
+        <p>
+            <label for="name" style="font-weight: 500;">Nommez le fichier : </label>
+			<input type="text" name="name" autocomplete="off" required>
+		</p>
+        <p>
+            <label for="flag" style="font-weight: 500;">Numérotez le fichier de départ : </label>
+			<input type="number" name="flag" autocomplete="off" required>
+		</p>
+
+        <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier à traiter </label>
+        <input class="file_upload" type="file" name="file" autocomplete="off" required>
+
+        <p style='text-align: center;'>
+            <button type="submit" class="button-85" role="button">Envoyer</button>
+        </p>
+
+    </dl>
+
+</form>
+
+<pre>{{content}}</pre>
+<p>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class=flashes>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+</div>
+      {% endif %}
+    {% endwith %}
+</p>
+</body>

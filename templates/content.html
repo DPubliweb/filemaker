@@ -1,0 +1,40 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js" ></script>
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+
+    
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin:0;
+        padding:0;
+        margin-top:-60
+    }
+    #gradient-canvas {
+        --gradient-color-1: #84e3c4;
+        --gradient-color-2: #6b8cf4;
+        --gradient-color-3: #f3bce3;
+        --gradient-color-4: #08c6f6;
+    }
+</style>
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <h2 style="text-align: center;">Vos fichiers ont été traités</h2>
+
+    <div class="container" style="width: 100%; align-items: center; display: flex; justify-content: center;">
+      <a href="/zipped_data" target="blank"><button class="button-85" role="button">Téléchargez</button></a>
+     </div>
+    <pre>{{content}}</pre>
+</body>
+</html>

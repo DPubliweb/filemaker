@@ -1,0 +1,62 @@
+
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js" ></script>
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            type: 'POST',
+            url: '/upload_file',
+            data: {
+                form_data: '{{form_data}}',
+            },
+            success: function() {
+                window.location.replace('/upload_file');
+            }
+          });
+    </script>
+
+
+    
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin:0;
+        padding:0;
+        margin-top:-60
+    }
+    #gradient-canvas {
+        --gradient-color-1: #84e3c4;
+        --gradient-color-2: #6b8cf4;
+        --gradient-color-3: #f3bce3;
+        --gradient-color-4: #08c6f6;
+    }
+</style>
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <section class="section_top">
+        <div class="section-container">
+            <div class="section-layout-container container-medium with-padding">
+                <div class="section-layout">
+                    <div class="gradient-area">
+                        <div class="gradient-title-area">
+                        <div class="text text-under text-under-blended section-title-1">Loading</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h1>LOADING </h1>
+</body>
