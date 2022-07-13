@@ -138,7 +138,7 @@ def upload_file():
         
         
                 line[6] = utm+'-p'+str(flag)
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[0]+"&nom="+line[1]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]
         
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
