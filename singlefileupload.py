@@ -1,3 +1,4 @@
+from fileinput import filename
 import os
 from os import walk
 import csv
@@ -59,11 +60,14 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
-            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=',')
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
             count = 0
             flag_input = request.form['flag']
             name = request.form['name']
             flag = int(flag_input)
+            link = request.form['link']
+            link_cutted = link[38:46]
+
             line_count = 0
 
             workbook = xlsxwriter.Workbook('parsed/'+name+'.xlsx')
@@ -135,7 +139,7 @@ def upload_file():
         
         
                 line[6] = utm+'-p'+str(flag)
-                line[4] = "https://contact788081.typeform.com/to/u4CNV4lF?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
         
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
@@ -242,7 +246,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open( "parsed_"+ file, "wb") as f:
+                        with open( "ready/parsed_"+ file, "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -266,12 +270,30 @@ def zipped_data():
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = 'ready'
+    file_path = "ready"
+    #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
+    filenames = next(walk("ready"), (None, None, []))[2]  # [] if no file
+    for file in filenames:
+                if (file != ".DS_Store"):
+                    file_path_del = "ready/"+file
+                    os.remove(file_path_del)
+    filenames2 = next(walk("parsed"), (None, None, []))[2]  # [] if no file
+    for file in filenames2:
+                if (file != ".DS_Store"):
+                    file_path_del_2 = "parsed/"+file
+                    os.remove(file_path_del_2)
+    filenames3 = next(walk("uploads"), (None, None, []))[2]  # [] if no file
+    for file in filenames3:
+                if (file != ".DS_Store"):
+                    file_path_del_3 = "uploads/"+file
+                    os.remove(file_path_del_3)
+
+
     return send_file(memory_file,
                      attachment_filename=fileName,
                      as_attachment=True)
