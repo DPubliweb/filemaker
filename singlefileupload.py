@@ -70,22 +70,22 @@ def upload_file():
 
             line_count = 0
 
-            workbook = xlsxwriter.Workbook('parsed/'+name+'.xlsx')
+            workbook = xlsxwriter.Workbook('./parsed/'+name+'.xlsx')
             worksheet = workbook.add_worksheet()
 
-            workbook1 = xlsxwriter.Workbook('parsed/'+name+'-p2.xlsx')
+            workbook1 = xlsxwriter.Workbook('./parsed/'+name+'-p2.xlsx')
             worksheet1 = workbook1.add_worksheet()
 
-            workbook2 = xlsxwriter.Workbook('parsed/'+name+'-p3.xlsx')
+            workbook2 = xlsxwriter.Workbook('./parsed/'+name+'-p3.xlsx')
             worksheet2 = workbook2.add_worksheet()
 
-            workbook3 = xlsxwriter.Workbook('parsed/'+name+'-p4.xlsx')
+            workbook3 = xlsxwriter.Workbook('./parsed/'+name+'-p4.xlsx')
             worksheet3 = workbook3.add_worksheet()
 
-            workbook4 = xlsxwriter.Workbook('parsed/'+name+'-p5.xlsx')
+            workbook4 = xlsxwriter.Workbook('./parsed/'+name+'-p5.xlsx')
             worksheet4 = workbook4.add_worksheet()
 
-            workbook5 = xlsxwriter.Workbook('parsed/'+name+'-p6.xlsx')
+            workbook5 = xlsxwriter.Workbook('./parsed/'+name+'-p6.xlsx')
             worksheet5 = workbook5.add_worksheet()
 
 
@@ -233,20 +233,20 @@ def upload_file():
                 workbook4.close()
                 workbook5.close()
             
-            filenames = next(walk("parsed"), (None, None, []))[2]  # [] if no file
+            filenames = next(walk("./parsed"), (None, None, []))[2]  # [] if no file
 
             count = 0
             for file in filenames:
                 if (file != ".DS_Store"):
                     count = count + 1
                     print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
+                    sample_file = open("./parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     r = requests.post("https://sma.vc/upload-file", files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open( "ready/parsed_"+ file, "wb") as f:
+                        with open( "./ready/parsed_"+ file, "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -280,17 +280,17 @@ def zipped_data():
     filenames = next(walk("ready"), (None, None, []))[2]  # [] if no file
     for file in filenames:
                 if (file != ".DS_Store"):
-                    file_path_del = "ready/"+file
+                    file_path_del = "./ready/"+file
                     os.remove(file_path_del)
     filenames2 = next(walk("parsed"), (None, None, []))[2]  # [] if no file
     for file in filenames2:
                 if (file != ".DS_Store"):
-                    file_path_del_2 = "parsed/"+file
+                    file_path_del_2 = "./parsed/"+file
                     os.remove(file_path_del_2)
     filenames3 = next(walk("uploads"), (None, None, []))[2]  # [] if no file
     for file in filenames3:
                 if (file != ".DS_Store"):
-                    file_path_del_3 = "uploads/"+file
+                    file_path_del_3 = "./uploads/"+file
                     os.remove(file_path_del_3)
 
 
