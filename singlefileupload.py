@@ -12,8 +12,7 @@ import time
 import zipfile
 from io import BytesIO
 import requests
-import tempfile
-import glob
+import waitress
 
 
 app=Flask(__name__)
@@ -298,4 +297,5 @@ def zipped_data():
                      as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(host = '0.0.0.0',port = 80, debug = False)
+    from waitress import serve
+    serve(app, host = '0.0.0.0',port = 80)
