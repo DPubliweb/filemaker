@@ -246,7 +246,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed_"+ file, "wb")) as f:
+                        with open(os.path.abspath("parsed_"+ file), "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
