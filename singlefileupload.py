@@ -101,6 +101,8 @@ def upload_file():
                 worksheet.write(0,5, first_line[5])
                 worksheet.write(0,6, first_line[6])
                 worksheet.write(0,7, first_line[7])
+                worksheet.write(0,8, first_line[8])
+
              else:
                 if line[5] == 'Mme':
                     line[5] = line[5]
@@ -150,6 +152,7 @@ def upload_file():
                     worksheet.write(line_count, 5, line[5])
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
+                    worksheet.write(line_count, 8, line[8])
                 elif count > 50000 and count < 100001:
                     worksheet1.write(line_count, 0, line[0])
                     worksheet1.write(line_count, 1, line[1])
