@@ -247,7 +247,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed_"+ file), "wb") as f:
+                        with open(os.path.abspath("ready/parsed_"+ file), "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -278,8 +278,8 @@ def zipped_data():
                     for file in files:
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
-    filenames = next(walk("workspace/ready"), (None, None, []))[2]  # [] if no file
-    
+    filenames = next(os.path.abspath("ready"), (None, None, []))[2]  # [] if no file
+    print(filenames)
     for file in filenames:
                 if (file != ".DS_Store"):
                     file_path_del = ('workspace/ready/'+file)
