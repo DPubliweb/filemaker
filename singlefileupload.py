@@ -70,7 +70,7 @@ def upload_file():
 
             line_count = 0
 
-            workbook = xlsxwriter.Workbook('parsed/'+name+'.xlsx')
+            workbook = xlsxwriter.Workbook('workspace/parsed/'+name+'.xlsx')
             worksheet = workbook.add_worksheet()
 
             workbook1 = xlsxwriter.Workbook('parsed/'+name+'-p2.xlsx')
@@ -240,13 +240,13 @@ def upload_file():
                 if (file != ".DS_Store"):
                     count = count + 1
                     print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
+                    sample_file = open("workspace/parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     r = requests.post("https://sma.vc/upload-file", files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed_"+ file), "wb") as f:
+                        with open("workspace/ready/parsed_"+ file, "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
