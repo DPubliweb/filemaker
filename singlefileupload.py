@@ -247,7 +247,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open(os.path.abspath("ready/parsed_"+ file), "wb") as f:
+                        with open(os.path.abspath("parsed_"+ file), "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -271,7 +271,7 @@ def zipped_data():
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = "workspace/ready"
+    file_path = os.path.abspath("ready")
     #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
@@ -282,7 +282,7 @@ def zipped_data():
     print(filenames)
     for file in filenames:
                 if (file != ".DS_Store"):
-                    file_path_del = ('workspace/ready/'+file)
+                    file_path_del = ('/ready/'+file)
                     os.remove(file_path_del)
     filenames2 = next(walk("workspace/parsed"), (None, None, []))[2]  # [] if no file
     for file in filenames2:
