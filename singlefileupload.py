@@ -278,6 +278,7 @@ def zipped_data():
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
     filenames = next(walk("workspace/ready"), (None, None, []))[2]  # [] if no file
+    print(filenames)
     for file in filenames:
                 if (file != ".DS_Store"):
                     file_path_del = ('workspace/ready/'+file)
