@@ -233,20 +233,21 @@ def upload_file():
                 workbook4.close()
                 workbook5.close()
             
-            filenames = next(walk("parsed"), (None, None, []))[2]  # [] if no file
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            print(filenames)
 
             count = 0
             for file in filenames:
                 if (file != ".DS_Store"):
                     count = count + 1
                     print("start " + file)
-                    sample_file = open("workspace/parsed/" + file, "rb")
+                    sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     r = requests.post("https://sma.vc/upload-file", files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open("workspace/ready/parsed_"+ file, "wb") as f:
+                        with open(os.path.abspath("parsed_"+ file), "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -278,7 +279,7 @@ def zipped_data():
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
     filenames = next(walk("workspace/ready"), (None, None, []))[2]  # [] if no file
-    print(filenames)
+    
     for file in filenames:
                 if (file != ".DS_Store"):
                     file_path_del = ('workspace/ready/'+file)
