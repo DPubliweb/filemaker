@@ -70,7 +70,7 @@ def upload_file():
 
             line_count = 0
 
-            workbook = xlsxwriter.Workbook('workspace/parsed/'+name+'.xlsx')
+            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
 
             workbook1 = xlsxwriter.Workbook('parsed/'+name+'-p2.xlsx')
