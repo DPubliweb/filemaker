@@ -256,7 +256,8 @@ def upload_file():
                     print(file)
         
             print('all file finish')
-                
+            filenames_ = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
+            print(filenames_)
 
         flash('File successfully uploaded')
         return render_template("content.html")
