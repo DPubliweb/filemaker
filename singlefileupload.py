@@ -271,13 +271,18 @@ def zipped_data():
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
     file_path = os.path.abspath("ready")
+    print(file_path)
     #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
-
+    filenames = next(walk("ready"), (None, None, []))[2]  # [] if no file
+    for file in filenames:
+                if (file != ".DS_Store"):
+                    file_path_del = "ready/"+file
+                    os.remove(file_path_del)
     filenames2 = next(walk("parsed"), (None, None, []))[2]  # [] if no file
     for file in filenames2:
                 if (file != ".DS_Store"):
