@@ -241,7 +241,7 @@ def upload_file():
                 if (file != ".DS_Store"):
                     count = count + 1
                     print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
+                    sample_file = open(os.path.abspath("parsed/" + file), "rb")
                     upload_file = {"xlsxFile": sample_file}
                     r = requests.post("https://sma.vc/upload-file", files=upload_file)
         
