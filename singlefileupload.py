@@ -135,11 +135,11 @@ def upload_file():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                line[7] = str(code)
+                line[8] = str(code)
         
         
                 line[6] = utm+'-p'+str(flag)
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[0]+"&nom="+line[1]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[0]+"&nom="+line[1]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
         
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
@@ -246,7 +246,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open( "ready/parsed_"+ file, "wb") as f:
+                        with open(os.path.abspath("parsed_"+ file, "wb")) as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
