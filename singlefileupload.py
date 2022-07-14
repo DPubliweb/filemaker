@@ -233,7 +233,7 @@ def upload_file():
                 workbook4.close()
                 workbook5.close()
             
-            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            filenames = next(walk(os.path.abspath("workspace")), (None, None, []))[2]  # [] if no file
             print(filenames)
 
             count = 0
