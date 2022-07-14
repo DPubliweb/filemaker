@@ -270,7 +270,7 @@ def zipped_data():
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = "ready"
+    file_path = os.path.abspath("ready")
     #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
