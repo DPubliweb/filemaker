@@ -260,10 +260,10 @@ def upload_file():
         
                 else:
                     print(file)
-        
-            print('all file finish')
             filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print(filenames_)
+            print("Hello", filenames_)
+            print('all file finish')
+       
 
         flash('File successfully uploaded')
         return render_template("content.html")
@@ -284,21 +284,21 @@ def zipped_data():
                     for file in files:
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
-    filenames = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
-    for file in filenames:
-                if (file != ".DS_Store"):
-                    file_path_del = (os.path.abspath("ready/"+file))
-                    os.remove(file_path_del)
-    filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-    for file in filenames2:
-                if (file != ".DS_Store"):
-                    file_path_del_2 = (os.path.abspath("parsed/"+file))
-                    os.remove(file_path_del_2)
-    filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
-    for file in filenames3:
-                if (file != ".DS_Store"):
-                    file_path_del_3 = (os.path.abspath("uploads/"+file))
-                    os.remove(file_path_del_3)
+   # filenames = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
+   # for file in filenames:
+   #             if (file != ".DS_Store"):
+   #                 file_path_del = (os.path.abspath("ready/"+file))
+   #                 os.remove(file_path_del)
+   # filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+   # for file in filenames2:
+   #             if (file != ".DS_Store"):
+   #                 file_path_del_2 = (os.path.abspath("parsed/"+file))
+   #                 os.remove(file_path_del_2)
+   # filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
+   # for file in filenames3:
+   #             if (file != ".DS_Store"):
+   #                 file_path_del_3 = (os.path.abspath("uploads/"+file))
+   #                 os.remove(file_path_del_3)
 
     print(memory_file)
 
