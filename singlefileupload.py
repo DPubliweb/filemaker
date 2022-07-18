@@ -141,7 +141,7 @@ def upload_file():
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "5")
-                line[8] = str(code)
+                line[7] = str(code)
                 if flag > 1:
                     line[6] = utm+'-p'+str(flag)
                 else:
