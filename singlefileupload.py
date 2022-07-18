@@ -76,19 +76,19 @@ def upload_file():
             workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
 
-            workbook1 = xlsxwriter.Workbook('parsed/'+name+'-p2.xlsx')
+            workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p2.xlsx'))
             worksheet1 = workbook1.add_worksheet()
 
-            workbook2 = xlsxwriter.Workbook('parsed/'+name+'-p3.xlsx')
+            workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3.xlsx'))
             worksheet2 = workbook2.add_worksheet()
 
-            workbook3 = xlsxwriter.Workbook('parsed/'+name+'-p4.xlsx')
+            workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
             worksheet3 = workbook3.add_worksheet()
 
-            workbook4 = xlsxwriter.Workbook('parsed/'+name+'-p5.xlsx')
+            workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5.xlsx'))
             worksheet4 = workbook4.add_worksheet()
 
-            workbook5 = xlsxwriter.Workbook('parsed/'+name+'-p6.xlsx')
+            workbook5 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6.xlsx'))
             worksheet5 = workbook5.add_worksheet()
 
 
@@ -139,7 +139,8 @@ def upload_file():
                 S = 5  # number of characters in the string.
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
-                code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
+                ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
+                code = ran.replace ("0", "5")
                 line[8] = str(code)
         
         
@@ -210,7 +211,6 @@ def upload_file():
              line_count = line_count +1
              count_str = str(count)
             print(count)
-            flash('Nombre de lignes détéctées dans le fichier :'+ count_str)
             if count <= 50001 :
                 workbook.close()
             elif count > 50001 and count <= 100001:
