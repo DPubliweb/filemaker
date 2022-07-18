@@ -24,11 +24,14 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 path = os.getcwd()
 # file Upload
 UPLOAD_FOLDER = os.path.join(path, 'uploads')
+PARSED = os.path.join(path, 'parsed')
 
 if not os.path.isdir(UPLOAD_FOLDER):
     os.mkdir(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['PARSED'] = PARSED
+
 
 
 ALLOWED_EXTENSIONS = set(['csv','xslx'])
@@ -249,7 +252,7 @@ def upload_file():
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
-                        with open(os.path.abspath("ready"+ file+"_parsed"), "wb") as f:
+                        with open(os.path.abspath(file), "wb") as f:
                             f.write(r.content)
                     else:
                         print(r.status_code)
@@ -259,7 +262,7 @@ def upload_file():
                     print(file)
         
             print('all file finish')
-            filenames_ = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
+            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames_)
 
         flash('File successfully uploaded')
@@ -274,7 +277,7 @@ def zipped_data():
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = os.path.abspath("ready")
+    file_path = os.path.abspath("parsed")
     #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
