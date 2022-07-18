@@ -278,27 +278,21 @@ def zipped_data():
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
     file_path = os.path.abspath("parsed")
-    #file_path2 = "ready/{}".format()
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
                               zipf.write(os.path.join(root, file))
     memory_file.seek(0)
-   # filenames = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
-   # for file in filenames:
-   #             if (file != ".DS_Store"):
-   #                 file_path_del = (os.path.abspath("ready/"+file))
-   #                 os.remove(file_path_del)
-   # filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-   # for file in filenames2:
-   #             if (file != ".DS_Store"):
-   #                 file_path_del_2 = (os.path.abspath("parsed/"+file))
-   #                 os.remove(file_path_del_2)
-   # filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
-   # for file in filenames3:
-   #             if (file != ".DS_Store"):
-   #                 file_path_del_3 = (os.path.abspath("uploads/"+file))
-   #                 os.remove(file_path_del_3)
+    filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+    for file in filenames2:
+                if (file != ".DS_Store"):
+                    file_path_del_2 = (os.path.abspath("parsed/"+file))
+                    os.remove(file_path_del_2)
+    filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
+    for file in filenames3:
+                if (file != ".DS_Store"):
+                    file_path_del_3 = (os.path.abspath("uploads/"+file))
+                    os.remove(file_path_del_3)
 
     print(memory_file)
 
