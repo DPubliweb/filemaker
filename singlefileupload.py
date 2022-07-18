@@ -142,10 +142,11 @@ def upload_file():
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "5")
                 line[8] = str(code)
-        
-        
-                line[6] = utm+'-p'+str(flag)
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[0]+"&nom="+line[1]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
+                if flag > 1:
+                    line[6] = utm+'-p'+str(flag)
+                else:
+                    line[6] = utm
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]+"&code_postal="+line[8]
         
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
@@ -265,7 +266,6 @@ def upload_file():
             print('all file finish')
        
 
-        flash('File successfully uploaded')
         return render_template("content.html")
         
     else:
