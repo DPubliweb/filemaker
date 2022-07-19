@@ -1,0 +1,63 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js"></script>
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='static/gradient.js')}}"></script>
+
+
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        margin-top: -60
+    }
+
+    #gradient-canvas {
+        --gradient-color-1: #84e3c4;
+        --gradient-color-2: #6b8cf4;
+        --gradient-color-3: #f3bce3;
+        --gradient-color-4: #08c6f6;
+    }
+</style>
+
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <div class='list' style="text-align: center;">
+    <h2 style="text-align: center;">Liste des liens </h2>
+
+    <input type="text" value="https://contact788081.typeform.com/to/OeCNlcDS?utm_source=xxxxx#nom=xxxxx&prenom=xxxxx&telephone=xxxxx&civilite=xxxxx&email=xxxxx&code=xxxxx&code_postal=xxxxx" id="myInput">
+    <button class="button-85" onclick=myFunction()>Harmonie d'audition</button>
+</div>
+
+    <script>
+        function myFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+        }
+    </script>
+
+
+</body>
+
+</html>

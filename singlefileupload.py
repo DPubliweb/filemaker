@@ -45,6 +45,10 @@ def allowed_file(filename):
 def upload_form():
     return render_template('upload.html')
 
+@app.route('/list', methods = ['GET', 'POST'])
+def home():
+    return render_template("list.html")
+
 
 @app.route('/', methods=['GET','POST'])
 def upload_file():
