@@ -178,3 +178,10 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   outline: 0 none;
 }
 
+
+@media only screen and (max-width: 726px) {
+  .text text-under text-under-blended section-title-1 {
+    text-align: center;
+  }
+}
+
