@@ -184,6 +184,9 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
     margin-left: 10px;
     margin-top: 5px;
   }
+  #gradient-canvas {
+    width: 44vw;
+  }
 
 }
 
