@@ -187,6 +187,17 @@ textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus {
   #gradient-canvas {
     width: 44vw;
   }
+  .list_input {
+    width: 50%;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .list_input {
+    width: 50% !important;
+  }
 
 }
 
