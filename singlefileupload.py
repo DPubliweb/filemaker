@@ -253,7 +253,7 @@ def upload_file():
                     print("start " + file)
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
-                    r = requests.post("https://sma.vc/upload-file", files=upload_file)
+                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
