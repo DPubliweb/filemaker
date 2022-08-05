@@ -70,7 +70,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
-            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=',')
             count = 0
             flag_input = request.form['flag']
             name = request.form['name']
@@ -393,7 +393,7 @@ def mms():
                 code = ran.replace ("0", "6")
                 line[7] = str(code)
                 if flag > 0:
-                    line[6] = '46.'+utm+'.p'+str(flag)
+                    line[6] = '46.'+utm+'p'+str(flag)
                 else:
                     line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/u4CNV4lF?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
