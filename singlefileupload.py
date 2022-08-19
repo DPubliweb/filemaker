@@ -305,41 +305,41 @@ def mms():
 
             line_count = 0
 
-            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p1-1.xlsx'))
+            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p1.xlsx'))
             worksheet = workbook.add_worksheet()
 
-            workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p1-2.xlsx'))
+            workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p2.xlsx'))
             worksheet1 = workbook1.add_worksheet()
 
-            workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p2-1.xlsx'))
+            workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3.xlsx'))
             worksheet2 = workbook2.add_worksheet()
 
-            workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p2-2.xlsx'))
-            worksheet3 = workbook3.add_worksheet()
-
-            workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-1.xlsx'))
-            worksheet4 = workbook4.add_worksheet()
-
-            workbook5 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-2.xlsx'))
-            worksheet5 = workbook5.add_worksheet()
-
-            workbook6 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-1.xlsx'))
-            worksheet6 = workbook6.add_worksheet()
-
-            workbook7 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-2.xlsx'))
-            worksheet7 = workbook7.add_worksheet()
-
-            workbook8 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-1.xlsx'))
-            worksheet8 = workbook4.add_worksheet()
-
-            workbook9 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-2.xlsx'))
-            worksheet9 = workbook5.add_worksheet()
-
-            workbook10 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-1.xlsx'))
-            worksheet10 = workbook10.add_worksheet()
-
-            workbook11 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-2.xlsx'))
-            worksheet11 = workbook11.add_worksheet()
+          ##  workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
+          ##  worksheet3 = workbook3.add_worksheet()
+##
+          ##  workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-1.xlsx'))
+          ##  worksheet4 = workbook4.add_worksheet()
+##
+          ##  workbook5 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-2.xlsx'))
+          ##  worksheet5 = workbook5.add_worksheet()
+##
+          ##  workbook6 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-1.xlsx'))
+          ##  worksheet6 = workbook6.add_worksheet()
+##
+          ##  workbook7 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-2.xlsx'))
+          ##  worksheet7 = workbook7.add_worksheet()
+##
+          ##  workbook8 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-1.xlsx'))
+          ##  worksheet8 = workbook4.add_worksheet()
+##
+          ##  workbook9 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-2.xlsx'))
+          ##  worksheet9 = workbook5.add_worksheet()
+##
+          ##  workbook10 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-1.xlsx'))
+          ##  worksheet10 = workbook10.add_worksheet()
+##
+          ##  workbook11 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-2.xlsx'))
+          ##  worksheet11 = workbook11.add_worksheet()
 
 
 
@@ -390,15 +390,15 @@ def mms():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "6")
+                code = ran.replace ("0", "3")
                 line[7] = str(code)
                 if flag > 0:
-                    line[6] = '46.'+utm+'p'+str(flag)
+                    line[6] = '46.'+utm+'.p'+str(flag)
                 else:
                     line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/u4CNV4lF?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
 
-                if count < 25001 :
+                if count < 50001 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
                     worksheet.write(line_count, 2, line[2])
@@ -407,7 +407,7 @@ def mms():
                     worksheet.write(line_count, 5, line[5])
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
-                elif count > 25001 and count < 50001:
+                elif count > 50001 and count < 100001:
                     worksheet1.write(line_count, 0, line[0])
                     worksheet1.write(line_count, 1, line[1])
                     worksheet1.write(line_count, 2, line[2])
@@ -416,7 +416,7 @@ def mms():
                     worksheet1.write(line_count, 5, line[5])
                     worksheet1.write(line_count, 6, line[6])
                     worksheet1.write(line_count, 7, line[7])
-                elif count > 50001 and count < 75001:
+                elif count > 100001 and count < 150001:
                     worksheet2.write(line_count, 0, line[0])
                     worksheet2.write(line_count, 1, line[1])
                     worksheet2.write(line_count, 2, line[2])
@@ -425,87 +425,87 @@ def mms():
                     worksheet2.write(line_count, 5, line[5])
                     worksheet2.write(line_count, 6, line[6])
                     worksheet2.write(line_count, 7, line[7])
-                elif count > 75001 and count < 100001:
-                    worksheet3.write(line_count, 0, line[0])
-                    worksheet3.write(line_count, 1, line[1])
-                    worksheet3.write(line_count, 2, line[2])
-                    worksheet3.write(line_count, 3, line[3])
-                    worksheet3.write(line_count, 4, line[4])
-                    worksheet3.write(line_count, 5, line[5])
-                    worksheet3.write(line_count, 6, line[6])
-                    worksheet3.write(line_count, 7, line[7])
-                elif count > 100001 and count < 125001:
-                    worksheet4.write(line_count, 0, line[0])
-                    worksheet4.write(line_count, 1, line[1])
-                    worksheet4.write(line_count, 2, line[2])
-                    worksheet4.write(line_count, 3, line[3])
-                    worksheet4.write(line_count, 4, line[4])
-                    worksheet4.write(line_count, 5, line[5])
-                    worksheet4.write(line_count, 6, line[6])
-                    worksheet4.write(line_count, 7, line[7])
-                elif count > 125001 and count < 150001:
-                    worksheet5.write(line_count, 0, line[0])
-                    worksheet5.write(line_count, 1, line[1])
-                    worksheet5.write(line_count, 2, line[2])
-                    worksheet5.write(line_count, 3, line[3])
-                    worksheet5.write(line_count, 4, line[4])
-                    worksheet5.write(line_count, 5, line[5])
-                    worksheet5.write(line_count, 6, line[6])
-                    worksheet5.write(line_count, 7, line[7])
-                elif count > 150001 and count < 175001:
-                    worksheet6.write(line_count, 0, line[0])
-                    worksheet6.write(line_count, 1, line[1])
-                    worksheet6.write(line_count, 2, line[2])
-                    worksheet6.write(line_count, 3, line[3])
-                    worksheet6.write(line_count, 4, line[4])
-                    worksheet6.write(line_count, 5, line[5])
-                    worksheet6.write(line_count, 6, line[6])
-                    worksheet6.write(line_count, 7, line[7])
-                elif count > 175001 and count < 200001:
-                    worksheet7.write(line_count, 0, line[0])
-                    worksheet7.write(line_count, 1, line[1])
-                    worksheet7.write(line_count, 2, line[2])
-                    worksheet7.write(line_count, 3, line[3])
-                    worksheet7.write(line_count, 4, line[4])
-                    worksheet7.write(line_count, 5, line[5])
-                    worksheet7.write(line_count, 6, line[6])
-                    worksheet7.write(line_count, 7, line[7])
-                elif count > 200001 and count < 225001:
-                    worksheet8.write(line_count, 0, line[0])
-                    worksheet8.write(line_count, 1, line[1])
-                    worksheet8.write(line_count, 2, line[2])
-                    worksheet8.write(line_count, 3, line[3])
-                    worksheet8.write(line_count, 4, line[4])
-                    worksheet8.write(line_count, 5, line[5])
-                    worksheet8.write(line_count, 6, line[6])
-                    worksheet8.write(line_count, 7, line[7])
-                elif count > 225001 and count < 250001:
-                    worksheet9.write(line_count, 0, line[0])
-                    worksheet9.write(line_count, 1, line[1])
-                    worksheet9.write(line_count, 2, line[2])
-                    worksheet9.write(line_count, 3, line[3])
-                    worksheet9.write(line_count, 4, line[4])
-                    worksheet9.write(line_count, 5, line[5])
-                    worksheet9.write(line_count, 6, line[6])
-                    worksheet9.write(line_count, 7, line[7])
-                elif count > 250001 and count < 275001:
-                    worksheet10.write(line_count, 0, line[0])
-                    worksheet10.write(line_count, 1, line[1])
-                    worksheet10.write(line_count, 2, line[2])
-                    worksheet10.write(line_count, 3, line[3])
-                    worksheet10.write(line_count, 4, line[4])
-                    worksheet10.write(line_count, 5, line[5])
-                    worksheet10.write(line_count, 6, line[6])
-                    worksheet10.write(line_count, 7, line[7])
-                elif count > 275001 and count < 300001:
-                    worksheet11.write(line_count, 0, line[0])
-                    worksheet11.write(line_count, 1, line[1])
-                    worksheet11.write(line_count, 2, line[2])
-                    worksheet11.write(line_count, 3, line[3])
-                    worksheet11.write(line_count, 4, line[4])
-                    worksheet11.write(line_count, 5, line[5])
-                    worksheet11.write(line_count, 6, line[6])
-                    worksheet11.write(line_count, 7, line[7])
+            ## elif count > 75001 and count < 100001:
+            ##     worksheet3.write(line_count, 0, line[0])
+            ##     worksheet3.write(line_count, 1, line[1])
+            ##     worksheet3.write(line_count, 2, line[2])
+            ##     worksheet3.write(line_count, 3, line[3])
+            ##     worksheet3.write(line_count, 4, line[4])
+            ##     worksheet3.write(line_count, 5, line[5])
+            ##     worksheet3.write(line_count, 6, line[6])
+            ##     worksheet3.write(line_count, 7, line[7])
+            ## elif count > 100001 and count < 125001:
+            ##     worksheet4.write(line_count, 0, line[0])
+            ##     worksheet4.write(line_count, 1, line[1])
+            ##     worksheet4.write(line_count, 2, line[2])
+            ##     worksheet4.write(line_count, 3, line[3])
+            ##     worksheet4.write(line_count, 4, line[4])
+            ##     worksheet4.write(line_count, 5, line[5])
+            ##     worksheet4.write(line_count, 6, line[6])
+            ##     worksheet4.write(line_count, 7, line[7])
+            ## elif count > 125001 and count < 150001:
+            ##     worksheet5.write(line_count, 0, line[0])
+            ##     worksheet5.write(line_count, 1, line[1])
+            ##     worksheet5.write(line_count, 2, line[2])
+            ##     worksheet5.write(line_count, 3, line[3])
+            ##     worksheet5.write(line_count, 4, line[4])
+            ##     worksheet5.write(line_count, 5, line[5])
+            ##     worksheet5.write(line_count, 6, line[6])
+            ##     worksheet5.write(line_count, 7, line[7])
+            ## elif count > 150001 and count < 175001:
+            ##     worksheet6.write(line_count, 0, line[0])
+            ##     worksheet6.write(line_count, 1, line[1])
+            ##     worksheet6.write(line_count, 2, line[2])
+            ##     worksheet6.write(line_count, 3, line[3])
+            ##     worksheet6.write(line_count, 4, line[4])
+            ##     worksheet6.write(line_count, 5, line[5])
+            ##     worksheet6.write(line_count, 6, line[6])
+            ##     worksheet6.write(line_count, 7, line[7])
+            ## elif count > 175001 and count < 200001:
+            ##     worksheet7.write(line_count, 0, line[0])
+            ##     worksheet7.write(line_count, 1, line[1])
+            ##     worksheet7.write(line_count, 2, line[2])
+            ##     worksheet7.write(line_count, 3, line[3])
+            ##     worksheet7.write(line_count, 4, line[4])
+            ##     worksheet7.write(line_count, 5, line[5])
+            ##     worksheet7.write(line_count, 6, line[6])
+            ##     worksheet7.write(line_count, 7, line[7])
+            ## elif count > 200001 and count < 225001:
+            ##     worksheet8.write(line_count, 0, line[0])
+            ##     worksheet8.write(line_count, 1, line[1])
+            ##     worksheet8.write(line_count, 2, line[2])
+            ##     worksheet8.write(line_count, 3, line[3])
+            ##     worksheet8.write(line_count, 4, line[4])
+            ##     worksheet8.write(line_count, 5, line[5])
+            ##     worksheet8.write(line_count, 6, line[6])
+            ##     worksheet8.write(line_count, 7, line[7])
+            ## elif count > 225001 and count < 250001:
+            ##     worksheet9.write(line_count, 0, line[0])
+            ##     worksheet9.write(line_count, 1, line[1])
+            ##     worksheet9.write(line_count, 2, line[2])
+            ##     worksheet9.write(line_count, 3, line[3])
+            ##     worksheet9.write(line_count, 4, line[4])
+            ##     worksheet9.write(line_count, 5, line[5])
+            ##     worksheet9.write(line_count, 6, line[6])
+            ##     worksheet9.write(line_count, 7, line[7])
+            ## elif count > 250001 and count < 275001:
+            ##     worksheet10.write(line_count, 0, line[0])
+            ##     worksheet10.write(line_count, 1, line[1])
+            ##     worksheet10.write(line_count, 2, line[2])
+            ##     worksheet10.write(line_count, 3, line[3])
+            ##     worksheet10.write(line_count, 4, line[4])
+            ##     worksheet10.write(line_count, 5, line[5])
+            ##     worksheet10.write(line_count, 6, line[6])
+            ##     worksheet10.write(line_count, 7, line[7])
+            ## elif count > 275001 and count < 300001:
+            ##     worksheet11.write(line_count, 0, line[0])
+            ##     worksheet11.write(line_count, 1, line[1])
+            ##     worksheet11.write(line_count, 2, line[2])
+            ##     worksheet11.write(line_count, 3, line[3])
+            ##     worksheet11.write(line_count, 4, line[4])
+            ##     worksheet11.write(line_count, 5, line[5])
+            ##     worksheet11.write(line_count, 6, line[6])
+            ##     worksheet11.write(line_count, 7, line[7])
 
                 if count%50000 == 0:
                     flag = flag + 1
@@ -515,96 +515,96 @@ def mms():
              line_count = line_count +1
              count_str = str(count)
             print(count)
-            if count <= 25001 :
+            if count <= 50001 :
                 workbook.close()
-            elif count > 25001 and count <= 50001:
-                workbook.close()
-                workbook1.close()
-            elif count > 50001 and count <= 75001:
+            elif count > 50001 and count <= 100001:
                 workbook.close()
                 workbook1.close()
-                workbook2.close()
-            elif count > 75001 and count <= 100001:
+            elif count > 100001 and count <= 150001:
                 workbook.close()
                 workbook1.close()
                 workbook2.close()
-                workbook3.close()
-            elif count > 100001 and count <= 125001:
+            elif count > 150001 and count <= 200001:
                 workbook.close()
                 workbook1.close()
                 workbook2.close()
                 workbook3.close()
-                workbook4.close()
-            elif count > 125001 and count <= 150001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-            elif count > 150001 and count <= 175001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close()
-            elif count > 175001 and count <= 200001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close()
-                workbook7.close()
-            elif count > 200001 and count <= 225001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close() 
-                workbook7.close()
-                workbook8.close()
-            elif count > 225001 and count <= 250001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close()
-                workbook7.close()
-                workbook8.close()
-                workbook9.close()
-            elif count > 250001 and count <= 275001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close()
-                workbook7.close()
-                workbook8.close()
-                workbook9.close()
-                workbook10.close()
-            elif count > 275001 and count <= 300001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
-                workbook6.close()
-                workbook7.close()
-                workbook8.close()
-                workbook9.close()
-                workbook10.close()
-                workbook11.close()
+        ##  elif count > 100001 and count <= 125001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook2.close()
+        ##      workbook3.close()
+        ##      workbook4.close()
+        ##  elif count > 125001 and count <= 150001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##  elif count > 150001 and count <= 175001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close()
+        ##  elif count > 175001 and count <= 200001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close()
+        ##      workbook7.close()
+        ##  elif count > 200001 and count <= 225001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close() 
+        ##      workbook7.close()
+        ##      workbook8.close()
+        ##  elif count > 225001 and count <= 250001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close()
+        ##      workbook7.close()
+        ##      workbook8.close()
+        ##      workbook9.close()
+        ##  elif count > 250001 and count <= 275001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close()
+        ##      workbook7.close()
+        ##      workbook8.close()
+        ##      workbook9.close()
+        ##      workbook10.close()
+        ##  elif count > 275001 and count <= 300001:
+        ##      workbook.close()
+        ##      workbook1.close()
+        ##      workbook3.close()
+        ##      workbook2.close()
+        ##      workbook4.close()
+        ##      workbook5.close()
+        ##      workbook6.close()
+        ##      workbook7.close()
+        ##      workbook8.close()
+        ##      workbook9.close()
+        ##      workbook10.close()
+        ##      workbook11.close()
 
             
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
