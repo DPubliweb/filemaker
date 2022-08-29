@@ -314,8 +314,8 @@ def mms():
             workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3.xlsx'))
             worksheet2 = workbook2.add_worksheet()
 
-          ##  workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
-          ##  worksheet3 = workbook3.add_worksheet()
+            workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
+            worksheet3 = workbook3.add_worksheet()
 ##
           ##  workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-1.xlsx'))
           ##  worksheet4 = workbook4.add_worksheet()
@@ -427,15 +427,15 @@ def mms():
                     worksheet2.write(line_count, 5, line[5])
                     worksheet2.write(line_count, 6, line[6])
                     worksheet2.write(line_count, 7, line[7])
-            ## elif count > 75001 and count < 100001:
-            ##     worksheet3.write(line_count, 0, line[0])
-            ##     worksheet3.write(line_count, 1, line[1])
-            ##     worksheet3.write(line_count, 2, line[2])
-            ##     worksheet3.write(line_count, 3, line[3])
-            ##     worksheet3.write(line_count, 4, line[4])
-            ##     worksheet3.write(line_count, 5, line[5])
-            ##     worksheet3.write(line_count, 6, line[6])
-            ##     worksheet3.write(line_count, 7, line[7])
+                elif count > 150001 and count < 200001:
+                    worksheet3.write(line_count, 0, line[0])
+                    worksheet3.write(line_count, 1, line[1])
+                    worksheet3.write(line_count, 2, line[2])
+                    worksheet3.write(line_count, 3, line[3])
+                    worksheet3.write(line_count, 4, line[4])
+                    worksheet3.write(line_count, 5, line[5])
+                    worksheet3.write(line_count, 6, line[6])
+                    worksheet3.write(line_count, 7, line[7])
             ## elif count > 100001 and count < 125001:
             ##     worksheet4.write(line_count, 0, line[0])
             ##     worksheet4.write(line_count, 1, line[1])
