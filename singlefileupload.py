@@ -155,6 +155,9 @@ def upload_file():
                     line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]+"&code_postal="+line[8]
         
+                line[1] = line[2] = ""
+
+
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
