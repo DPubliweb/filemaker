@@ -624,10 +624,12 @@ def mms():
                         print("finish parsed_" + file)
                         with open(os.path.abspath("parsed/"+file), "wb") as f:
                             f.write(r.content)
-                    else:
-                        print(r.status_code)
-                        print(r.content)
-        
+                    elif r.status.code == 502:
+                        time.sleep(2)
+                        print("start " + file)
+                        sample_file = open("parsed/" + file, "rb")
+                        upload_file = {"xlsxFile": sample_file}
+                        r = requests.post("https://sma.vc/upload-file", files=upload_file)
                 else:
                     print(file)
             filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
