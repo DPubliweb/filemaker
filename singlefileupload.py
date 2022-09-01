@@ -113,7 +113,6 @@ def upload_file():
                 worksheet.write(0,7, first_line[7])
                 worksheet.write(0,8, first_line[8])
                 worksheet.write(0,9, first_line[9])
-                worksheet.write(0,10, first_line[10])
 
 
 
@@ -170,7 +169,6 @@ def upload_file():
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
                     worksheet.write(line_count, 9, line[9])
-                    worksheet.write(line_count, 10, line[10])
 
                 elif count > 50000 and count < 100001:
                     worksheet1.write(line_count, 0, line[0])
