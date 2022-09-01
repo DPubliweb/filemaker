@@ -644,7 +644,7 @@ def mms():
         return redirect(request.url)
 
 @app.route('/JJ', methods=['GET','POST'])
-def mms():
+def JJ():
     if request.method == 'POST':
         render_template('content.html')
         # check if the post request has the file part
