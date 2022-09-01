@@ -516,7 +516,7 @@ function normalizeColor(hexCode) {
 }
   
   function playMusic() {
-    var music = new Audio('./Elevator-Music.mp3');
+    var music = new Audio('Elevator-Music.mp3');
     music.play();
   }
   
