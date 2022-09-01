@@ -515,6 +515,10 @@ function normalizeColor(hexCode) {
     alert("Copied the text: " + copyText.value);
 }
   
+  function playMusic() {
+    var music = new Audio('./Elevator-Music.mp3');
+    music.play();
+  }
   
   
   /*
