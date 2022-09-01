@@ -38,29 +38,23 @@
                 <div class="section-layout">
                     <div class="gradient-area">
                         <div class="gradient-title-area">
-                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker</div>
+                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker (JJ)</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<form  method="POST" enctype="multipart/form-data">
+<form  method="POST" enctype="multipart/form-data" action="/mms">
     
     <dl>	
         <p>
             <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
-			<input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
+			<input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy">
 		</p>
         <p>
             <label for="name" style="font-weight: 500;">Nommez le fichier : </label>
 			<input type="text" name="name" autocomplete="off" required>
-		</p>
-        <p>
-            <label for="link" style="font-weight: 500;">Lien du typeform : </label>
-			<input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
-            <a href="/list" target="_blank">Liste des liens</a>
-
 		</p>
         <p>
             <label for="flag" style="font-weight: 500;">Numérotez le fichier de départ : </label>
@@ -71,9 +65,7 @@
         <input class="file_upload" type="file" name="file" autocomplete="off" required>
 
         <p style='text-align: center;'>
-            <button type="submit" class="button-85" role="button">Envoyer</button>
-            <a href="/upload_mms">MMS</a>
-            <a href="/upload_jj">JJ</a>
+            <button onclick="window.location.href='JJ';" type="submit" class="button-85" role="button">Envoyer</button>
         </p>
 
     </dl>
