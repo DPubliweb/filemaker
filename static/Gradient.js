@@ -514,13 +514,7 @@ function normalizeColor(hexCode) {
     /* Alert the copied text */
     alert("Copied the text: " + copyText.value);
 }
-  
-  function playMusic() {
-    var music = new Audio('Elevator-Music.mp3');
-    music.play();
-  }
-  
-  
+
   /*
   *Finally initializing the Gradient class, assigning a canvas to it and calling Gradient.connect() which initializes everything,
   * Use Gradient.pause() and Gradient.play() for controls.
