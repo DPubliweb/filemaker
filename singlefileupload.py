@@ -14,6 +14,9 @@ from io import BytesIO
 import requests
 import tempfile
 import glob
+import sys
+import subprocess
+from playsound import playsound
 
 
 app=Flask(__name__, static_folder='./static', static_url_path='/')
@@ -56,6 +59,7 @@ def upload_mms():
 @app.route('/', methods=['GET','POST'])
 def upload_file():
     if request.method == 'POST':
+        playsound("static/Elevator-Music.mp3")
         render_template('content.html')
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -72,9 +76,9 @@ def upload_file():
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
             csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
             count = 0
-            flag_input = request.form['flag']
+            #flag_input = request.form['flag']
             name = request.form['name']
-            flag = int(flag_input)
+            #flag = int(flag_input)
             link = request.form['link']
             link_cutted = link[38:46]
 
@@ -82,22 +86,6 @@ def upload_file():
 
             workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
-
-            workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p2.xlsx'))
-            worksheet1 = workbook1.add_worksheet()
-
-            workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3.xlsx'))
-            worksheet2 = workbook2.add_worksheet()
-
-            workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
-            worksheet3 = workbook3.add_worksheet()
-
-            workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5.xlsx'))
-            worksheet4 = workbook4.add_worksheet()
-
-            workbook5 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6.xlsx'))
-            worksheet5 = workbook5.add_worksheet()
-
 
             for line in csv_reader_all:
              if(count == 0):
@@ -112,9 +100,6 @@ def upload_file():
                 worksheet.write(0,6, first_line[6])
                 worksheet.write(0,7, first_line[7])
                 worksheet.write(0,8, first_line[8])
-                worksheet.write(0,9, first_line[9])
-
-
 
              else:
                 if line[5] == 'Mme':
@@ -152,12 +137,9 @@ def upload_file():
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "5")
                 line[7] = str(code)
-                if flag > 1:
-                    line[6] = utm+'-p'+str(flag)
-                else:
-                    line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]+"&code_postal="+line[8]+"&age="+line[9]
-        
+                line[6] = utm
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[7]+"&civilite="+line[5]+"&code_postal="+line[8]
+               
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
@@ -168,57 +150,6 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
-                    worksheet.write(line_count, 9, line[9])
-
-                elif count > 50000 and count < 100001:
-                    worksheet1.write(line_count, 0, line[0])
-                    worksheet1.write(line_count, 1, line[1])
-                    worksheet1.write(line_count, 2, line[2])
-                    worksheet1.write(line_count, 3, line[3])
-                    worksheet1.write(line_count, 4, line[4])
-                    worksheet1.write(line_count, 5, line[5])
-                    worksheet1.write(line_count, 6, line[6])
-                    worksheet1.write(line_count, 7, line[7])
-                elif count > 100001 and count < 150000:
-                    worksheet2.write(line_count, 0, line[0])
-                    worksheet2.write(line_count, 1, line[1])
-                    worksheet2.write(line_count, 2, line[2])
-                    worksheet2.write(line_count, 3, line[3])
-                    worksheet2.write(line_count, 4, line[4])
-                    worksheet2.write(line_count, 5, line[5])
-                    worksheet2.write(line_count, 6, line[6])
-                    worksheet2.write(line_count, 7, line[7])
-                elif count > 150000 and count < 200000:
-                    worksheet3.write(line_count, 0, line[0])
-                    worksheet3.write(line_count, 1, line[1])
-                    worksheet3.write(line_count, 2, line[2])
-                    worksheet3.write(line_count, 3, line[3])
-                    worksheet3.write(line_count, 4, line[4])
-                    worksheet3.write(line_count, 5, line[5])
-                    worksheet3.write(line_count, 6, line[6])
-                    worksheet3.write(line_count, 7, line[7])
-                elif count > 200000 and count < 250000:
-                    worksheet4.write(line_count, 0, line[0])
-                    worksheet4.write(line_count, 1, line[1])
-                    worksheet4.write(line_count, 2, line[2])
-                    worksheet4.write(line_count, 3, line[3])
-                    worksheet4.write(line_count, 4, line[4])
-                    worksheet4.write(line_count, 5, line[5])
-                    worksheet4.write(line_count, 6, line[6])
-                    worksheet4.write(line_count, 7, line[7])
-                elif count > 250000 and count < 300000:
-                    worksheet5.write(line_count, 0, line[0])
-                    worksheet5.write(line_count, 1, line[1])
-                    worksheet5.write(line_count, 2, line[2])
-                    worksheet5.write(line_count, 3, line[3])
-                    worksheet5.write(line_count, 4, line[4])
-                    worksheet5.write(line_count, 5, line[5])
-                    worksheet5.write(line_count, 6, line[6])
-                    worksheet5.write(line_count, 7, line[7])
-
-                if count%50000 == 0:
-                    flag = flag + 1
-                    line_count = 0
         
              count = count + 1
              line_count = line_count +1
@@ -226,31 +157,6 @@ def upload_file():
             print(count)
             if count <= 50001 :
                 workbook.close()
-            elif count > 50001 and count <= 100001:
-                workbook.close()
-                workbook1.close()
-            elif count > 100001 and count <= 150001:
-                workbook.close()
-                workbook1.close()
-                workbook2.close()
-            elif count > 150001 and count <= 200001:
-                workbook.close()
-                workbook1.close()
-                workbook2.close()
-                workbook3.close()
-            elif count > 200001 and count <= 250001:
-                workbook.close()
-                workbook1.close()
-                workbook2.close()
-                workbook3.close()
-                workbook4.close()
-            elif count > 250001 and count <= 300001:
-                workbook.close()
-                workbook1.close()
-                workbook3.close()
-                workbook2.close()
-                workbook4.close()
-                workbook5.close()
             
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)

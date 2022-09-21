@@ -45,8 +45,10 @@
             </div>
         </div>
     </section>
+   
 <form  method="POST" enctype="multipart/form-data">
-    
+    <div class="card">
+        <div class="container">
     <dl>	
         <p>
             <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
@@ -67,13 +69,14 @@
         <input class="file_upload" type="file" name="file" autocomplete="off" required>
 
         <p style='text-align: center;'>
-            <button type="submit" class="button-85" role="button" onclick="playMusic()">Envoyer</button>
+            <button type="submit" class="button-85" role="button">Envoyer</button>
             <a href="/upload_mms">MMS</a>
             <a href="/upload_jj">JJ</a>
         </p>
 
     </dl>
-
+</div>
+</div>
 </form>
 
 <pre>{{content}}</pre>
