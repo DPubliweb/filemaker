@@ -12,11 +12,6 @@ import time
 import zipfile
 from io import BytesIO
 import requests
-import tempfile
-import glob
-import sys
-import subprocess
-from playsound import playsound
 
 
 app=Flask(__name__, static_folder='./static', static_url_path='/')
@@ -59,7 +54,6 @@ def upload_mms():
 @app.route('/', methods=['GET','POST'])
 def upload_file():
     if request.method == 'POST':
-        playsound("static/Elevator-Music.mp3")
         render_template('content.html')
         # check if the post request has the file part
         if 'file' not in request.files:
