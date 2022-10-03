@@ -1,24 +1,25 @@
-
 <!doctype html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
-    <script src="Gradient.js" ></script>
+    <script src="Gradient.js"></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Publiweb File Maker</title>
     <script src="{{url_for('static', filename='gradient.js')}}"></script>
 
-    
+
     <title>Publiweb File Maker</title>
 </head>
 <style>
     body {
-        margin:0;
-        padding:0;
-        margin-top:-60
+        margin: 0;
+        padding: 0;
+        margin-top: -60
     }
+
     #gradient-canvas {
         --gradient-color-1: #84e3c4;
         --gradient-color-2: #6b8cf4;
@@ -26,70 +27,84 @@
         --gradient-color-4: #08c6f6;
     }
 </style>
+
 <body>
     <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
     <script>
         var gradient = new Gradient()
         gradient.initGradient('#gradient-canvas');
     </script>
+    <script>
+        function play() {
+            var audio = document.getElementById("audio");
+            audio.play();
+        }</script>
+
     <section class="section_top">
         <div class="section-container">
             <div class="section-layout-container container-medium with-padding">
                 <div class="section-layout">
                     <div class="gradient-area">
                         <div class="gradient-title-area">
-                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker</div>
+                            <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                                Publiweb File Maker</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-   
-<form  method="POST" enctype="multipart/form-data">
-    <div class="card">
-        <div class="container">
-    <dl>	
-        <p>
-            <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
-			<input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
-		</p>
-        <p>
-            <label for="name" style="font-weight: 500;">Nommez le fichier : </label>
-			<input type="text" name="name" autocomplete="off" required>
-		</p>
-        <p>
-            <label for="link" style="font-weight: 500;">Lien du typeform : </label>
-			<input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
-            <a href="/list" target="_blank">Liste des liens</a>
 
-		</p>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="card">
+            <div class="container">
+                <dl>
+                    <p>
+                        <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
+                        <input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
+                    </p>
+                    <p>
+                        <label for="name" style="font-weight: 500;">Nommez le fichier : </label>
+                        <input type="text" name="name" autocomplete="off" required>
+                    </p>
+                    <p>
+                        <label for="link" style="font-weight: 500;">Lien du typeform : </label>
+                        <input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
+                        <a href="/list" target="_blank">Liste des liens</a>
 
-        <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier à traiter </label>
-        <input class="file_upload" type="file" name="file" autocomplete="off" required>
+                    </p>
 
-        <p style='text-align: center;'>
-            <button type="submit" class="button-85" role="button">Envoyer</button>
-            <a href="/upload_mms">MMS</a>
-            <a href="/upload_jj">JJ</a>
-        </p>
+                    <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le
+                        fichier à traiter </label>
+                    <input class="file_upload" type="file" name="file" autocomplete="off" required>
 
-    </dl>
-</div>
-</div>
-</form>
+                    <p style='text-align: center;'>
+                        <button type="submit" class="button-85" role="button" value="PLAY" onclick="play()">Envoyer
+                        </button>
+                        <audio id="audio" src="/static/Elevator-Music.mp3"></audio>
 
-<pre>{{content}}</pre>
-<p>
-    
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class=flashes>
+
+                        <a href="/upload_mms">MMS</a>
+                        <a href="/upload_jj">JJ</a>
+                    </p>
+
+                </dl>
+            </div>
+        </div>
+    </form>
+
+    <pre>{{content}}</pre>
+    <p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+    <div class=flashes>
         {% for message in messages %}
-          <p>{{ message }}</p>
+        <p>{{ message }}</p>
         {% endfor %}
-</div>
-      {% endif %}
+    </div>
+    {% endif %}
     {% endwith %}
-</p>
+    </p>
+
 </body>
