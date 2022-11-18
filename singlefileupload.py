@@ -574,5 +574,10 @@ def zipped_data():
                      attachment_filename=fileName,
                      as_attachment=True)
 
+@app.route('/sms')
+def sms():
+    return render_template('sms.html')
+
+
 if __name__ == "__main__":
     app.run(host = '0.0.0.0',port = 8080, debug = False)

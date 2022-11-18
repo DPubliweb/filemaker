@@ -1,0 +1,81 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js" ></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin:0;
+        padding:0;
+        margin-top:-60
+    }
+    #gradient-canvas {
+        --gradient-color-1: #84e3c4;
+        --gradient-color-2: #6b8cf4;
+        --gradient-color-3: #f3bce3;
+        --gradient-color-4: #08c6f6;
+    }
+</style>
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <section class="section_top">
+        <div class="section-container">
+            <div class="section-layout-container container-medium with-padding">
+                <div class="section-layout">
+                    <div class="gradient-area">
+                        <div class="gradient-title-area">
+                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker (JJ)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<form  method="POST" enctype="multipart/form-data" action="/mms">
+    
+    <dl>	
+        <p>
+            <label for="text_sms" style="font-weight: 500;">Texte du SMS : </label>
+			<textarea class="text_sms" type="text" name="text_sms" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
+            <div id="charNum"></div>
+		</p>
+
+        <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier à traiter </label>
+        <input class="file_upload" type="file" name="file" autocomplete="off" required>
+
+        <p style='text-align: center;'>
+            <button onclick="window.location.href='JJ';" type="submit" class="button-85" role="button">Envoyer</button>
+        </p>
+
+    </dl>
+
+</form>
+
+<pre>{{content}}</pre>
+<p>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class=flashes>
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+</div>
+      {% endif %}
+    {% endwith %}
+</p>
+</body>

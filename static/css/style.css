@@ -46,8 +46,9 @@ label {
   clear: left;
   width: 250px;
   text-align: left;
-
+  margin-bottom: 5px;
 }
+
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -186,6 +187,10 @@ label {
 
 .button-85:active {
   background: transparent;
+}
+
+.text_sms {
+  display: flex;
 }
 
 textarea:focus,
