@@ -49,8 +49,8 @@
     
     <dl>	
         <p>
-            <label for="text_sms" style="font-weight: 500;">Texte du SMS : </label>
-			<textarea class="text_sms" type="text" name="text_sms" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
+            <label for="sms_content" style="font-weight: 500;">Texte du SMS : </label>
+			<textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
             <div id="charNum"></div>
 		</p>
 
@@ -58,7 +58,7 @@
         <input class="file_upload" type="file" name="file" autocomplete="off" required>
 
         <p style='text-align: center;'>
-            <button onclick="window.location.href='JJ';" type="submit" class="button-85" role="button">Envoyer</button>
+            <button onclick="window.location.href='sms_write';" type="submit" class="button-85" role="button">Envoyer</button>
         </p>
 
     </dl>

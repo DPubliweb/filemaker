@@ -221,32 +221,6 @@ def mms():
 
             workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4.xlsx'))
             worksheet3 = workbook3.add_worksheet()
-##
-          ##  workbook4 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-1.xlsx'))
-          ##  worksheet4 = workbook4.add_worksheet()
-##
-          ##  workbook5 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p3-2.xlsx'))
-          ##  worksheet5 = workbook5.add_worksheet()
-##
-          ##  workbook6 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-1.xlsx'))
-          ##  worksheet6 = workbook6.add_worksheet()
-##
-          ##  workbook7 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p4-2.xlsx'))
-          ##  worksheet7 = workbook7.add_worksheet()
-##
-          ##  workbook8 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-1.xlsx'))
-          ##  worksheet8 = workbook4.add_worksheet()
-##
-          ##  workbook9 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p5-2.xlsx'))
-          ##  worksheet9 = workbook5.add_worksheet()
-##
-          ##  workbook10 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-1.xlsx'))
-          ##  worksheet10 = workbook10.add_worksheet()
-##
-          ##  workbook11 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p6-2.xlsx'))
-          ##  worksheet11 = workbook11.add_worksheet()
-
-
 
             for line in csv_reader_all:
              if(count == 0):
@@ -482,7 +456,7 @@ def JJ():
                     line[6] = utm
                 else:
                     line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/tmwuHRDY?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
+                line[4] = "https://contact788081.typeform.com/to/uOCz2qY8?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
 
                 line[1] = line[2] = ""
 
@@ -574,9 +548,99 @@ def zipped_data():
                      attachment_filename=fileName,
                      as_attachment=True)
 
-@app.route('/sms')
+@app.route('/sms_write')
 def sms():
-    return render_template('sms.html')
+    if request.method == 'POST':
+        render_template('sms.html')
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        sms_content = request.form['sms_content']
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            count = 0
+            line_count = 0
+
+            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
+            worksheet = workbook.add_worksheet()
+
+            for line in csv_reader_all:
+             if(count == 0):
+                first_line = line
+                #writer.writerow(line)
+                worksheet.write(0,0,first_line[0])
+                worksheet.write(0,1, first_line[1])
+                worksheet.write(0,2, first_line[2])
+                worksheet.write(0,3, first_line[3])
+                worksheet.write(0,4, first_line[4])
+                worksheet.write(0,5, first_line[5])
+                worksheet.write(0,6, first_line[6])
+                worksheet.write(0,7, first_line[7])
+                worksheet.write(0,8, first_line[8])
+
+             else:
+                str_1 = sms_content.replace ("{civilite}", line[0])
+                str_2 = str_1.replace("{nom}", line[1])
+                str_3 = str_2.replace("{lien}", line[2])
+                line[0] = str_3
+               
+                if count < 50000 :
+                    worksheet.write(line_count, 0, line[0])
+                    worksheet.write(line_count, 1, line[1])
+                    worksheet.write(line_count, 2, line[2])
+                    worksheet.write(line_count, 3, line[3])
+                    worksheet.write(line_count, 4, line[4])
+                    worksheet.write(line_count, 5, line[5])
+                    worksheet.write(line_count, 6, line[6])
+                    worksheet.write(line_count, 7, line[7])
+                    worksheet.write(line_count, 8, line[8])
+        
+             count = count + 1
+             line_count = line_count +1
+             count_str = str(count)
+            print(count)
+            workbook.close()
+            
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            print(filenames)
+            count = 0
+            for file in filenames:
+                if (file != ".DS_Store"):
+                    count = count + 1
+                    print("start " + file)
+                    sample_file = open("parsed/" + file, "rb")
+                    upload_file = {"xlsxFile": sample_file}
+                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
+        
+                    if r.status_code == 200:
+                        print("finish parsed_" + file)
+                        with open(os.path.abspath("parsed/"+file), "wb") as f:
+                            f.write(r.content)
+                    else:
+                        print(r.status_code)
+                        print(r.content)
+        
+                else:
+                    print(file)
+            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            print("Hello", filenames_)
+            print('all file finish')
+       
+
+        return render_template("content.html")
+        
+    else:
+        flash('Allowed file types are only csv')
+        return redirect(request.url)
+
 
 
 if __name__ == "__main__":
