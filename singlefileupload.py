@@ -275,7 +275,7 @@ def mms():
                     line[6] = '46.'+utm+'.p'+str(flag)
                 else:
                     line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/u4CNV4lF?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
+                line[4] = "https://contact788081.typeform.com/to/uOCz2qY8?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
 
                 line[1] = line[2] = ""
 
