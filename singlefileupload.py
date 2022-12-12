@@ -51,6 +51,10 @@ def list():
 def upload_mms():
     return render_template("upload_mms.html")
 
+@app.route('/sms', methods = ['GET', 'POST'])
+def sms():
+    return render_template("sms.html")
+
 @app.route('/', methods=['GET','POST'])
 def upload_file():
     if request.method == 'POST':
@@ -374,151 +378,6 @@ def mms():
         flash('Allowed file types are only csv')
         return redirect(request.url)
 
-@app.route('/JJ', methods=['GET','POST'])
-def JJ():
-    if request.method == 'POST':
-        render_template('content.html')
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        utm = request.form['utm']
-        if file.filename == '':
-            flash('No file selected for uploading')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
-            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
-            count = 0
-            flag_input = request.form['flag']
-            name = request.form['name']
-            flag = int(flag_input)
-
-            line_count = 0
-
-            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'-p1.xlsx'))
-            worksheet = workbook.add_worksheet()
-
-
-            for line in csv_reader_all:
-             if(count == 0):
-                first_line = line
-                #writer.writerow(line)
-                worksheet.write(0,0,first_line[0])
-                worksheet.write(0,1, first_line[1])
-                worksheet.write(0,2, first_line[2])
-                worksheet.write(0,3, first_line[3])
-                worksheet.write(0,4, first_line[4])
-                worksheet.write(0,5, first_line[5])
-                worksheet.write(0,6, first_line[6])
-                worksheet.write(0,7, first_line[7])
-
-             else:
-                if line[5] == 'Mme':
-                    line[5] = line[5]
-                elif line[5] == 'm':
-                    line[5] = 'M'
-                elif line[5] == 'f':
-                    line[5] = 'Mme'
-                else:
-                    line[5] = 'M'
-        
-        
-                line[3] = str(line[3])
-        
-                line[0] = line[0].replace("√®",'è')
-                line[0] = line[0].replace("√©", 'é')
-                line[0] = line[0].replace("√´", 'ë')
-                line[0] = line[0].replace("√ß", 'ç')
-                line[0] = line[0].replace("√™", 'ê')
-                line[0] = line[0].replace("√£¬ß", 'ç')
-                line[0] = line[0].replace("√Ø", 'ï')
-
-
-                line[1] = line[1].replace("√®", 'è')
-                line[1] = line[1].replace("√©", 'é')
-                line[1] = line[1].replace("√´", 'ë')
-                line[1] = line[1].replace("√ß", 'ç')
-                line[1] = line[1].replace("√™", 'ê')
-                line[1] = line[1].replace("√£¬ß", 'ç')
-                line[1] = line[1].replace("√Ø", 'ï')
-        
-                S = 5  # number of characters in the string.
-                # call random.choices() string module to find the string in Uppercase + numeric data.
-        
-                ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "2")
-                line[7] = str(code)
-                if flag > 0:
-                    line[6] = utm
-                else:
-                    line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/uOCz2qY8?utm_source="+line[6]+"&name="+line[0]+"&surname="+line[1]+"&email="+line[2]+"&phone="+line[3]+"&code="+line[7]
-
-                line[1] = line[2] = ""
-
-                if count < 50001 :
-                    worksheet.write(line_count, 0, line[0])
-                    worksheet.write(line_count, 1, line[1])
-                    worksheet.write(line_count, 2, line[2])
-                    worksheet.write(line_count, 3, line[3])
-                    worksheet.write(line_count, 4, line[4])
-                    worksheet.write(line_count, 5, line[5])
-                    worksheet.write(line_count, 6, line[6])
-                    worksheet.write(line_count, 7, line[7])
-
-
-                if count%50000 == 0:
-                    flag = flag + 1
-                    line_count = 0
-        
-             count = count + 1
-             line_count = line_count +1
-             count_str = str(count)
-            print(count)
-            if count <= 50001 :
-                workbook.close()
-
-           
-            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print(filenames)
-            count = 0
-            for file in filenames:
-                if (file != ".DS_Store"):
-                    count = count + 1
-                    print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
-                    upload_file = {"xlsxFile": sample_file}
-                    r = requests.post("https://sma.vc/upload-file", files=upload_file)
-        
-                    if r.status_code == 200:
-                        print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed/"+file), "wb") as f:
-                            f.write(r.content)
-                    elif r.status.code == 502:
-                        time.sleep(2)
-                        print("start " + file)
-                        sample_file = open("parsed/" + file, "rb")
-                        upload_file = {"xlsxFile": sample_file}
-                        r = requests.post("https://sma.vc/upload-file", files=upload_file)
-                else:
-                    print(file)
-            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print("Hello", filenames_)
-            print('all file finish')
-       
-
-        return render_template("content.html")
-        
-    else:
-        flash('Allowed file types are only csv')
-        return redirect(request.url)
-
-
-
 @app.route('/zipped_data')
 def zipped_data():
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -548,8 +407,8 @@ def zipped_data():
                      attachment_filename=fileName,
                      as_attachment=True)
 
-@app.route('/sms_write')
-def sms():
+@app.route('/sms_write', methods=['GET','POST'])
+def sms_write():
     if request.method == 'POST':
         render_template('sms.html')
         # check if the post request has the file part
@@ -566,8 +425,12 @@ def sms():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
             csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            name = request.form['name']
             count = 0
             line_count = 0
+            civilite = "{civilite}"
+            nom = "{nom}"
+            lien = "{lien}"
 
             workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
@@ -580,60 +443,22 @@ def sms():
                 worksheet.write(0,1, first_line[1])
                 worksheet.write(0,2, first_line[2])
                 worksheet.write(0,3, first_line[3])
-                worksheet.write(0,4, first_line[4])
-                worksheet.write(0,5, first_line[5])
-                worksheet.write(0,6, first_line[6])
-                worksheet.write(0,7, first_line[7])
-                worksheet.write(0,8, first_line[8])
-
+                worksheet.write(0,4,first_line[4])
              else:
-                str_1 = sms_content.replace ("{civilite}", line[0])
-                str_2 = str_1.replace("{nom}", line[1])
-                str_3 = str_2.replace("{lien}", line[2])
-                line[0] = str_3
+                
+                #line[4] = sms_content.replace(civilite, line[0])
+                #line[4] = sms_content.replace(nom, line[1])
+                line[4] = sms_content.replace(lien, line[2]).replace(civilite, line[0]).replace(nom, line[1])
                
                 if count < 50000 :
-                    worksheet.write(line_count, 0, line[0])
-                    worksheet.write(line_count, 1, line[1])
-                    worksheet.write(line_count, 2, line[2])
-                    worksheet.write(line_count, 3, line[3])
-                    worksheet.write(line_count, 4, line[4])
-                    worksheet.write(line_count, 5, line[5])
-                    worksheet.write(line_count, 6, line[6])
-                    worksheet.write(line_count, 7, line[7])
-                    worksheet.write(line_count, 8, line[8])
+                    worksheet.write(line_count, 0, line[3])
+                    worksheet.write(line_count, 1, line[4])
         
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
             print(count)
             workbook.close()
-            
-            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print(filenames)
-            count = 0
-            for file in filenames:
-                if (file != ".DS_Store"):
-                    count = count + 1
-                    print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
-                    upload_file = {"xlsxFile": sample_file}
-                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
-        
-                    if r.status_code == 200:
-                        print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed/"+file), "wb") as f:
-                            f.write(r.content)
-                    else:
-                        print(r.status_code)
-                        print(r.content)
-        
-                else:
-                    print(file)
-            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print("Hello", filenames_)
-            print('all file finish')
-       
 
         return render_template("content.html")
         

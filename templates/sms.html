@@ -38,14 +38,14 @@
                 <div class="section-layout">
                     <div class="gradient-area">
                         <div class="gradient-title-area">
-                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker (JJ)</div>
+                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<form  method="POST" enctype="multipart/form-data" action="/mms">
+<form  method="POST" enctype="multipart/form-data" action="/sms_write">
     
     <dl>	
         <p>
@@ -53,6 +53,10 @@
 			<textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
             <div id="charNum"></div>
 		</p>
+        <p>
+            <label for="name" style="font-weight: 500;">Nommez le fichier : </label>
+            <input type="text" name="name" autocomplete="off" required>
+        </p>
 
         <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier à traiter </label>
         <input class="file_upload" type="file" name="file" autocomplete="off" required>
