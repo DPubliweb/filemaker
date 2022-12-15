@@ -528,7 +528,8 @@ function countChar(val) {
     $('#charNum').text(len);
   }
 };
-  
+
+
   /*
   *Finally initializing the Gradient class, assigning a canvas to it and calling Gradient.connect() which initializes everything,
   * Use Gradient.pause() and Gradient.play() for controls.

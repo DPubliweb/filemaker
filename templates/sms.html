@@ -20,10 +20,10 @@
         margin-top:-60
     }
     #gradient-canvas {
-        --gradient-color-1: #84e3c4;
-        --gradient-color-2: #6b8cf4;
-        --gradient-color-3: #f3bce3;
-        --gradient-color-4: #08c6f6;
+        --gradient-color-1: #8fb1cc;
+        --gradient-color-2: #adc3d1;
+        --gradient-color-3: #eeecf1;
+        --gradient-color-4: #949494;
     }
 </style>
 <body>
@@ -38,7 +38,9 @@
                 <div class="section-layout">
                     <div class="gradient-area">
                         <div class="gradient-title-area">
-                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">Publiweb File Maker</div>
+                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                            <h1 style="font-size:60px">Publiweb File Maker</h1> 
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +51,7 @@
     
     <dl>	
         <p>
-            <label for="sms_content" style="font-weight: 500;">Texte du SMS : </label>
+            <h3 for="sms_content" style="font-weight: 500;">Texte du SMS : </h3>
 			<textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
             <div id="charNum"></div>
 		</p>

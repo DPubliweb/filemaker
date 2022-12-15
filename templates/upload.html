@@ -10,7 +10,6 @@
     <title>Publiweb File Maker</title>
     <script src="{{url_for('static', filename='gradient.js')}}"></script>
 
-
     <title>Publiweb File Maker</title>
 </head>
 <style>
@@ -21,10 +20,10 @@
     }
 
     #gradient-canvas {
-        --gradient-color-1: #84e3c4;
-        --gradient-color-2: #6b8cf4;
-        --gradient-color-3: #f3bce3;
-        --gradient-color-4: #08c6f6;
+        --gradient-color-1: #b365d6;
+        --gradient-color-2: #b3cdf4;
+        --gradient-color-3: #ee343f;
+        --gradient-color-4: #fac15a;
     }
 </style>
 
@@ -47,18 +46,27 @@
                     <div class="gradient-area">
                         <div class="gradient-title-area">
                             <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
-                                Publiweb File Maker</div>
-                        </div>
+                                <div class="top_page"><h1>Publiweb File Maker</h1>
+                                <nav class="navMenu">
+                                    <a href="/sms">SMS</a>
+                                    <a href="/upload_mms">MMS</a>
+                                    <div class="dot"></div>
+                                  </nav>
+                                  </div>
+                              </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </section>
-
+    <body>
     <form method="POST" enctype="multipart/form-data">
-        <div class="card">
-            <div class="container">
+            <div class="formbg-outer">
+                <div class="formbg">
+                  <div class="formbg-inner padding-horizontal--48">
                 <dl>
+                    <div class="field padding-bformbgottom--24">
                     <p>
                         <label for="utm" style="font-weight: 500;">Choissiez l'utm : </label>
                         <input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
@@ -70,8 +78,6 @@
                     <p>
                         <label for="link" style="font-weight: 500;">Lien du typeform : </label>
                         <input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
-                        <a href="/list" target="_blank">Liste des liens</a>
-
                     </p>
 
                     <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le
@@ -82,15 +88,12 @@
                         <button type="submit" class="button-85" role="button" value="PLAY" onclick="play()">Envoyer
                         </button>
                         <audio id="audio" src="/static/Elevator-Music.mp3"></audio>
-
-
-                        <a href="/upload_mms">MMS</a>
-                        <a href="/sms">SMS</a>
                     </p>
-
+                </div>
                 </dl>
             </div>
         </div>
+</div>        
     </form>
 
     <pre>{{content}}</pre>
