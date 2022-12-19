@@ -12,6 +12,7 @@ import time
 import zipfile
 from io import BytesIO
 import requests
+import pandas as pd
 
 
 app=Flask(__name__, static_folder='./static', static_url_path='/')
@@ -387,7 +388,11 @@ def zipped_data():
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
-                              zipf.write(os.path.join(root, file))
+                        if (file != ".DS_Store"):
+                            read_file = pd.read_excel(r'parsed/'+file)
+                            read_file.to_csv(r'parsed/'+file, index=None, header=True)
+                            zipf.write(os.path.join(root, file))
+                            os.remove(file_path)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
