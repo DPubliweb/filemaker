@@ -10,7 +10,6 @@ Jinja2==3.1.2
 MarkupSafe==2.1.1
 numpy==1.24.0
 openpyxl==3.0.10
-pandas==1.5.2
 pyobjc-core==8.5.1
 pyobjc-framework-Accessibility==8.5.1
 pyobjc-framework-Accounts==8.5.1
