@@ -388,6 +388,8 @@ def zipped_data():
           for root, dirs, files in os.walk(file_path):
                     for file in files:
                         if (file != ".DS_Store"):
+                            csv_file = pd.read_csv(file)
+                            csv_file.to_csv('new_'+file,index = None)
                             zipf.write(os.path.join(root, file))
                             os.remove(file_path)
     memory_file.seek(0)
