@@ -389,7 +389,6 @@ def zipped_data():
                     for file in files:
                         if (file != ".DS_Store"):
                             zipf.write(os.path.join(root, file))
-                            os.remove(file_path)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
