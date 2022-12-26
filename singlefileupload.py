@@ -390,6 +390,8 @@ def zipped_data():
           for root, dirs, files in os.walk(file_path):
                     for file in files:
                         if (file != ".DS_Store"):
+                            csv = Workbook(file)
+                            csv.Save("test.csv")
                             zipf.write(os.path.join(root, file))
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
