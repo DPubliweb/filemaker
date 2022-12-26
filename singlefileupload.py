@@ -13,10 +13,6 @@ import zipfile
 from io import BytesIO
 import requests
 import pandas as pd
-import jpype
-import asposecells
-jpype.startJVM()
-from asposecells.api import Workbook
 
 app=Flask(__name__, static_folder='./static', static_url_path='/')
 app.secret_key = "secret key"
@@ -184,8 +180,8 @@ def upload_file():
             filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
                 if (file != ".DS_Store"):
-                            csv = Workbook(file)
-                            csv.Save("/parsed/test.csv")
+                            read_file = pd.read_excel(file)
+                            read_file.to_csv("Test.csv", index=None, header=True)
                             print("Salut",file)
             print("Salut", filenames_)
             print('all file finish')
