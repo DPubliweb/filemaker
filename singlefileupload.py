@@ -386,14 +386,16 @@ def zipped_data():
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
     file_path = os.path.abspath("parsed")
+    for file in filenames:
+         if (file != ".DS_Store"):
+                            csv = Workbook(file)
+                            csv.Save("/parsed/test.csv")
+                            print("Salut",files)
+
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
-                        if (file != ".DS_Store"):
-                            csv = Workbook(file)
-                            csv.Save("/parsed/test.csv")
                             zipf.write(os.path.join(root, files))
-                            print("Salut",files)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
