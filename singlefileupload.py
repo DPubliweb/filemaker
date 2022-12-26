@@ -182,7 +182,12 @@ def upload_file():
                 else:
                     print(file)
             filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print("Hello", filenames_)
+            for file in filenames:
+                if (file != ".DS_Store"):
+                            csv = Workbook(file)
+                            csv.Save("/parsed/test.csv")
+                            print("Salut",file)
+            print("Salut", filenames_)
             print('all file finish')
        
 
@@ -386,12 +391,7 @@ def zipped_data():
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
     file_path = os.path.abspath("parsed")
-    for file in filenames:
-         if (file != ".DS_Store"):
-                            csv = Workbook(file)
-                            csv.Save("/parsed/test.csv")
-                            print("Salut",files)
-
+    
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
