@@ -13,6 +13,10 @@ import zipfile
 from io import BytesIO
 import requests
 import pandas as pd
+import jpype
+import asposecells
+jpype.startJVM()
+from asposecells.api import Workbook
 
 app=Flask(__name__, static_folder='./static', static_url_path='/')
 app.secret_key = "secret key"
@@ -354,7 +358,6 @@ def mms():
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     r = requests.post("https://sma.vc/upload-file", files=upload_file)
-        
                     if r.status_code == 200:
                         print("finish parsed_" + file)
                         with open(os.path.abspath("parsed/"+file), "wb") as f:
@@ -367,8 +370,6 @@ def mms():
                         r = requests.post("https://sma.vc/upload-file", files=upload_file)
                 else:
                     print(file)
-            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print("Hello", filenames_)
             print('all file finish')
        
 
@@ -380,6 +381,7 @@ def mms():
 
 @app.route('/zipped_data')
 def zipped_data():
+    filenames = next(walk(os.path.abspath("/parsed")), (None, None, []))[2]  # [] if no file
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
