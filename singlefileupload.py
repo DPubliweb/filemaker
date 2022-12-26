@@ -178,7 +178,7 @@ def upload_file():
                 else:
                     print(file)
             filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            for file in filenames:
+            for file in filenames_:
                 if (file != ".DS_Store"):
                             read_file = pd.read_excel(file)
                             read_file.to_csv("Test.csv", index=None, header=True)
