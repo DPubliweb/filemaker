@@ -393,7 +393,7 @@ def zipped_data():
                             csv = Workbook(file)
                             csv.Save("/parsed/test.csv")
                             zipf.write(os.path.join(root, files))
-                            print(files)
+                            print("Salut",files)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
