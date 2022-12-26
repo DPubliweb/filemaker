@@ -177,13 +177,14 @@ def upload_file():
         
                 else:
                     print(file)
-            filenames_ = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            for file in filenames_:
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            for file in filenames:
                 if (file != ".DS_Store"):
-                            read_file = pd.read_excel(file)
-                            read_file.to_csv("Test.csv", index=None, header=True)
-                            print("Salut",file)
-            print("Salut", filenames_)
+                    read_file = pd.read_excel('parsed/'+file)
+                    file = file[:-4]
+                    read_file.to_csv("ready/"+file+"csv", index=None, header=True)
+                    print("Salut",file)
+            print("Salut", filenames)
             print('all file finish')
        
 
@@ -382,16 +383,18 @@ def mms():
 
 @app.route('/zipped_data')
 def zipped_data():
-    filenames = next(walk(os.path.abspath("/parsed")), (None, None, []))[2]  # [] if no file
+    filenames = next(walk(os.path.abspath("/ready")), (None, None, []))[2]  # [] if no file
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = os.path.abspath("parsed")
+    file_path = os.path.abspath("ready")
     
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
-                            zipf.write(os.path.join(root, files))
+                        if (file != ".DS_Store"):
+                            zipf.write(os.path.join(root, file))
+                            #os.remove(file_path)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
@@ -402,6 +405,11 @@ def zipped_data():
     for file in filenames3:
                 if (file != ".DS_Store"):
                     file_path_del_3 = (os.path.abspath("uploads/"+file))
+                    os.remove(file_path_del_3)
+    filenames3 = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
+    for file in filenames3:
+                if (file != ".DS_Store"):
+                    file_path_del_3 = (os.path.abspath("ready/"+file))
                     os.remove(file_path_del_3)
 
     print(memory_file)
