@@ -406,12 +406,12 @@ def zipped_data():
                 if (file != ".DS_Store"):
                     file_path_del_3 = (os.path.abspath("uploads/"+file))
                     os.remove(file_path_del_3)
-    filenames3 = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
-    for file in filenames3:
+    filenames4 = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
+    for file in filenames4:
                 if (file != ".DS_Store"):
-                    file_path_del_3 = (os.path.abspath("ready/"+file))
-                    os.remove(file_path_del_3)
-
+                    file_path_del_4 = (os.path.abspath("ready/"+file))
+                    os.remove(file_path_del_4)
+    
     print(memory_file)
 
 
