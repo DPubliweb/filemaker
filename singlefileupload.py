@@ -419,6 +419,38 @@ def zipped_data():
                      attachment_filename=fileName,
                      as_attachment=True)
 
+@app.route('/zipped_data_2')
+def zipped_data_2():
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    fileName = "ready_files{}.zip".format(timestr)
+    memory_file = BytesIO()
+    file_path = os.path.abspath("final")
+    
+    with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
+          for root, dirs, files in os.walk(file_path):
+                    for file in files:
+                        if (file != ".DS_Store"):
+                            zipf.write(os.path.join(root, file))
+                            #os.remove(file_path)
+    memory_file.seek(0)
+    filenames2 = next(walk(os.path.abspath("final")), (None, None, []))[2]  # [] if no file
+    for file in filenames2:
+                if (file != ".DS_Store"):
+                    file_path_del_2 = (os.path.abspath("final/"+file))
+                    os.remove(file_path_del_2)
+    filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
+    for file in filenames3:
+                if (file != ".DS_Store"):
+                    file_path_del_3 = (os.path.abspath("uploads/"+file))
+                    os.remove(file_path_del_3)
+
+    print(memory_file)
+
+
+    return send_file(memory_file,
+                     attachment_filename=fileName,
+                     as_attachment=True)
+
 @app.route('/sms_write', methods=['GET','POST'])
 def sms_write():
     if request.method == 'POST':
@@ -436,7 +468,7 @@ def sms_write():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
-            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=',')
             name = request.form['name']
             count = 0
             line_count = 0
@@ -444,7 +476,7 @@ def sms_write():
             nom = "{nom}"
             lien = "{lien}"
 
-            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
+            workbook = xlsxwriter.Workbook(os.path.abspath('final/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
 
             for line in csv_reader_all:
@@ -452,15 +484,19 @@ def sms_write():
                 first_line = line
                 #writer.writerow(line)
                 worksheet.write(0,0,first_line[0])
-                worksheet.write(0,1, first_line[1])
-                worksheet.write(0,2, first_line[2])
-                worksheet.write(0,3, first_line[3])
+                worksheet.write(0,1,first_line[1])
+                worksheet.write(0,2,first_line[2])
+                worksheet.write(0,3,first_line[3])
                 worksheet.write(0,4,first_line[4])
+                worksheet.write(0,5,first_line[5])
+                worksheet.write(0,6,first_line[6])
+                worksheet.write(0,7,first_line[7])
+                worksheet.write(0,8,first_line[8])
              else:
                 
                 #line[4] = sms_content.replace(civilite, line[0])
                 #line[4] = sms_content.replace(nom, line[1])
-                line[4] = sms_content.replace(lien, line[2]).replace(civilite, line[0]).replace(nom, line[1])
+                line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0])
                
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[3])
@@ -472,7 +508,7 @@ def sms_write():
             print(count)
             workbook.close()
 
-        return render_template("content.html")
+        return render_template("content_sms.html")
         
     else:
         flash('Allowed file types are only csv')
