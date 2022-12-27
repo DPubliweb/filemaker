@@ -511,7 +511,7 @@ def sms_write():
         return render_template("content_sms.html")
         
     else:
-        flash('Allowed file types are only csv')
+        flash('Allowed file types are only csv!')
         return redirect(request.url)
 
 
