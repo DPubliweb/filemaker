@@ -19,11 +19,12 @@
         padding:0;
         margin-top:-60
     }
+
     #gradient-canvas {
-        --gradient-color-1: #8fb1cc;
-        --gradient-color-2: #adc3d1;
-        --gradient-color-3: #eeecf1;
-        --gradient-color-4: #949494;
+        --gradient-color-1: #b365d6;
+        --gradient-color-2: #b3cdf4;
+        --gradient-color-3: #ee343f;
+        --gradient-color-4: #fac15a;
     }
 </style>
 <body>
@@ -48,8 +49,11 @@
         </div>
     </section>
 <form  method="POST" enctype="multipart/form-data" action="/sms_write">
-    
+    <div class="formbg-outer">
+        <div class="formbg">
+          <div class="formbg-inner padding-horizontal--48">
     <dl>	
+        <div class="field padding-bformbgottom--24">
         <p>
             <h3 for="sms_content" style="font-weight: 500;">Texte du SMS : </h3>
 			<textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
@@ -66,9 +70,11 @@
         <p style='text-align: center;'>
             <button onclick="window.location.href='sms_write';" type="submit" class="button-85" role="button">Envoyer</button>
         </p>
-
+</div>
     </dl>
-
+</div>
+</div>
+</div>        
 </form>
 
 <pre>{{content}}</pre>
