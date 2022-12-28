@@ -362,3 +362,13 @@ textarea{
               rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
               rgba(0, 0, 0, 0) 0px 0px 0px 0px;
 }
+
+.nmbre {
+  display: flex;
+  font-size: 12px;
+}
+.nmbre_message {
+  display: flex;
+  font-size: 12px;
+
+}

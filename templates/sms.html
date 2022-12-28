@@ -1,23 +1,47 @@
 <!doctype html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
-    <script src="Gradient.js" ></script>
+    <script src="Gradient.js"></script>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Publiweb File Maker</title>
     <script src="{{url_for('static', filename='gradient.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    </script>
+    <script>
+        function countChar(val) {
+            var len = val.value.length;
+            var len_message = 0
+            if (len <= 160) {
+                len_message = 1
+            }
+            else if (len > 160 & len <= 320) {
+                len_message = 2
+            }
+            else if (len > 320 ) {
+                len_message = 3
+            }
+            else if (len == 0) {
+                len_message == 0
+            }
+            $('#charNum').text(len);
+            document.getElementById('counter').value=len
+            $('#messNum').text(len_message);
+        }
 
-    
+    </script>
+
+
     <title>Publiweb File Maker</title>
 </head>
 <style>
     body {
-        margin:0;
-        padding:0;
-        margin-top:-60
+        margin: 0;
+        padding: 0;
+        margin-top: -60
     }
 
     #gradient-canvas {
@@ -27,6 +51,7 @@
         --gradient-color-4: #fac15a;
     }
 </style>
+
 <body>
     <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
     <script>
@@ -39,55 +64,63 @@
                 <div class="section-layout">
                     <div class="gradient-area">
                         <div class="gradient-title-area">
-                        <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
-                            <h1 style="font-size:60px">Publiweb File Maker</h1> 
-                        </div>
+                            <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                                <h1 style="font-size:60px">Publiweb File Maker</h1>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<form  method="POST" enctype="multipart/form-data" action="/sms_write">
-    <div class="formbg-outer">
-        <div class="formbg">
-          <div class="formbg-inner padding-horizontal--48">
-    <dl>	
-        <div class="field padding-bformbgottom--24">
-        <p>
-            <h3 for="sms_content" style="font-weight: 500;">Texte du SMS : </h3>
-			<textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60" onkeyup="countChar(this)"></textarea>
-            <div id="charNum"></div>
-		</p>
-        <p>
-            <label for="name" style="font-weight: 500;">Nom du fichier : </label>
-            <input type="text" name="name" autocomplete="off" required>
-        </p>
+    <form method="POST" enctype="multipart/form-data" action="/sms_write">
+        <div class="formbg-outer">
+            <div class="formbg">
+                <div class="formbg-inner padding-horizontal--48">
+                    <dl>
+                        <div class="field padding-bformbgottom--24">
+                            <p>
+                            <h3 for="sms_content" style="font-weight: 500;">Texte du SMS : </h3>
+                            <textarea class="sms_content" type="text" name="sms_content" rows="10" cols="60"
+                                onkeyup="countChar(this)"></textarea>
+                            <div class="nmbre">Nombre de caractères : <div id="charNum" style="margin-left: 2px;"></div></div>
+                            </p>
+                            <div class="nmbre_message">Nombre de message :<div id="messNum" style="margin-left: 3px;"></div></div>
+                            <p>
+                                <label for="name" style="font-weight: 500;">Nom du fichier : </label>
+                                <input type="text" name="name" autocomplete="off" required>
+                            </p>
+                            <p>
+                                <input type="hidden" name="counter" autocomplete="off" id="counter" value={len}>
+                            </p>
 
-        <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier à traiter </label>
-        <input class="file_upload" type="file" name="file" autocomplete="off" required>
+                            <label for="file"
+                                style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le fichier
+                                à traiter </label>
+                            <input class="file_upload" type="file" name="file" autocomplete="off" required>
 
-        <p style='text-align: center;'>
-            <button onclick="window.location.href='sms_write';" type="submit" class="button-85" role="button">Envoyer</button>
-        </p>
-</div>
-    </dl>
-</div>
-</div>
-</div>        
-</form>
+                            <p style='text-align: center;'>
+                                <button onclick="window.location.href='sms_write';" type="submit" class="button-85"
+                                    role="button">Envoyer</button>
+                            </p>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </form>
 
-<pre>{{content}}</pre>
-<p>
-    
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class=flashes>
+    <pre>{{content}}</pre>
+    <p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+    <div class=flashes>
         {% for message in messages %}
-          <p>{{ message }}</p>
+        <p>{{ message }}</p>
         {% endfor %}
-</div>
-      {% endif %}
+    </div>
+    {% endif %}
     {% endwith %}
-</p>
+    </p>
 </body>
