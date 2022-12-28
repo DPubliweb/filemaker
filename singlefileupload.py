@@ -496,6 +496,7 @@ def sms_write():
                 
                 #line[4] = sms_content.replace(civilite, line[0])
                 #line[4] = sms_content.replace(nom, line[1])
+                
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0])
                
                 if count < 50000 :
