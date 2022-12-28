@@ -470,7 +470,6 @@ def sms_write():
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
             csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=',')
             name = request.form['name']
-            counter = request.form['counter']
             count = 0
             line_count = 0
             civilite = "{civilite}"
@@ -494,13 +493,10 @@ def sms_write():
                 worksheet.write(0,7,first_line[7])
                 worksheet.write(0,8,first_line[8])
              else:
-                int_counter = int(counter)
-                cut = (int_counter - 20 + 23 - 160)
-                abs_cut = abs(cut)
-                print(abs_cut)
+                
                 #line[4] = sms_content.replace(civilite, line[0])
                 #line[4] = sms_content.replace(nom, line[1])
-                line[0] = line[0][0:abs_cut]
+                
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0])
                
                 if count < 50000 :
