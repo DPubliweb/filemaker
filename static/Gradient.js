@@ -515,12 +515,6 @@ function normalizeColor(hexCode) {
     alert("Copied the text: " + copyText.value);
 }
 
-function play() {
-    var audio = document.getElementById("audio");
-    audio.play();
-  }
-  ;
-
 
   /*
   *Finally initializing the Gradient class, assigning a canvas to it and calling Gradient.connect() which initializes everything,

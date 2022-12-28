@@ -9,6 +9,9 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Publiweb File Maker</title>
     <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script>
+             let play = function(){document.getElementById("audio").play()}
+    </script>
 
     <title>Publiweb File Maker</title>
 </head>
@@ -87,7 +90,7 @@
                     <p style='text-align: center;'>
                         <button type="submit" class="button-85" role="button" value="PLAY" onclick="play()">Envoyer
                         </button>
-                        <audio id="audio" src="/static/Elevator-Music.mp3"></audio>
+                        <audio id="audio" src="https://www.publiwebsms.com/wp-content/uploads/2022/12/Elevator-Music.mp3"></audio>
                     </p>
                 </div>
                 </dl>
