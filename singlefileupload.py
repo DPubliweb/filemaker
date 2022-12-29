@@ -203,7 +203,7 @@ def upload_file():
                     print("Salut",file)
             print("Salut", filenames)
             print('all file finish')
-       
+
 
         return render_template("content.html")
     
@@ -257,7 +257,7 @@ def zipped_data_2():
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "ready_files{}.zip".format(timestr)
     memory_file = BytesIO()
-    file_path = os.path.abspath("final")
+    file_path = os.path.abspath("final_csv")
     
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
@@ -266,10 +266,10 @@ def zipped_data_2():
                             zipf.write(os.path.join(root, file))
                             #os.remove(file_path)
     memory_file.seek(0)
-    filenames2 = next(walk(os.path.abspath("final")), (None, None, []))[2]  # [] if no file
+    filenames2 = next(walk(os.path.abspath("final_csv")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
                 if (file != ".DS_Store"):
-                    file_path_del_2 = (os.path.abspath("final/"+file))
+                    file_path_del_2 = (os.path.abspath("final_csv/"+file))
                     os.remove(file_path_del_2)
     filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
     for file in filenames3:
@@ -350,6 +350,16 @@ def sms_write():
              count_str = str(count)
             print(count)
             workbook.close()
+
+            filenames = next(walk(os.path.abspath("final")), (None, None, []))[2]  # [] if no file
+            for file in filenames:
+                if (file != ".DS_Store"):
+                    read_file = pd.read_excel('final/'+file)
+                    file = file[:-4]
+                    read_file.to_csv("final_csv/"+file+"csv", index=None, header=True)
+                    print("Salut",file)
+            print("Salut", filenames)
+            print('all file finish')
 
         return render_template("content_sms.html")
         
