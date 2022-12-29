@@ -26,8 +26,14 @@ form {
   display: flex;
   justify-content: center;
   margin-top:-50px;
-
 }
+
+@media screen and (max-width: 950px) {
+  form {
+    margin-top:0px;
+  }
+}
+
 
 input[type=number] {
   width: 30%;
