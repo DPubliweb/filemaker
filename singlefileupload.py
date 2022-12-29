@@ -38,8 +38,21 @@ ALLOWED_EXTENSIONS = set(['csv','xslx'])
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/', methods = ['GET'])
+def home():
+  return render_template('login.html')
 
-@app.route('/')
+@app.route('/', methods = ['POST'])
+def login():
+    identifiant = request.form['identifiant']
+    print(identifiant)
+    password = request.form['password']
+    if (identifiant == 'contact@publiweb.agency' and password == 'Nanah148148'):
+        return render_template('upload.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/upload')
 def upload_form():
     return render_template('upload.html')
 
@@ -55,7 +68,7 @@ def upload_mms():
 def sms():
     return render_template("sms.html")
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload_file():
     if request.method == 'POST':
         render_template('content.html')
