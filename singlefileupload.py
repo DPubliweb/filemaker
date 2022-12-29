@@ -6,7 +6,7 @@ from unicodedata import name
 import xlsxwriter
 import string
 import random
-from flask import Flask, flash, request, redirect, render_template, send_file, url_for, make_response, after_this_request
+from flask import Flask, flash, request, redirect, render_template, send_file, url_for, make_response, after_this_request, session
 from werkzeug.utils import secure_filename
 import time
 import zipfile
@@ -44,35 +44,39 @@ def home():
 
 @app.route('/', methods = ['POST'])
 def login():
+    session['completed'] = False
     identifiant = request.form['identifiant']
-    print(identifiant)
     password = request.form['password']
     if (identifiant == 'contact@publiweb.agency' and password == 'Nanah148148'):
+        session['completed'] = True
         return render_template('upload.html')
     else:
         return render_template('login.html')
 
+@app.route('/refused')
+def refused():
+    return render_template('refused.html')
+
 @app.route('/upload')
 def upload_form():
-    return render_template('upload.html')
-
-@app.route('/list', methods = ['GET', 'POST'])
-def list():
-    return render_template("list.html")
-
-@app.route('/upload_mms', methods = ['GET', 'POST'])
-def upload_mms():
-    return render_template("upload_mms.html")
+    print(session.get('completed', None))
+    if session.get('completed', None) == True :
+        return render_template('upload.html')
+    else:
+        return render_template('refused.html')
 
 @app.route('/sms', methods = ['GET', 'POST'])
 def sms():
-    return render_template("sms.html")
+    if session.get('completed', None) == True :
+        return render_template('sms.html')
+    else:
+        return render_template('refused.html')
 
 @app.route('/upload', methods=['GET','POST'])
 def upload_file():
     if request.method == 'POST':
         render_template('content.html')
-        # check if the post request has the file part
+    # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
@@ -202,7 +206,7 @@ def upload_file():
        
 
         return render_template("content.html")
-        
+    
     else:
         flash('Allowed file types are only csv')
         return redirect(request.url)
