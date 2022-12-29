@@ -470,12 +470,14 @@ def sms_write():
             file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
             csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=',')
             name = request.form['name']
+            short_url = request.form['short_url']
             counter = request.form['counter']
             count = 0
             line_count = 0
             civilite = "{civilite}"
             nom = "{nom}"
             lien = "{lien}"
+            print(short_url)
 
             workbook = xlsxwriter.Workbook(os.path.abspath('final/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
@@ -494,13 +496,16 @@ def sms_write():
                 worksheet.write(0,7,first_line[7])
                 worksheet.write(0,8,first_line[8])
              else:
-                int_counter = int(counter)
-                cut = (int_counter - 20 + 23 - 160)
+                if(short_url == 'aud' or short_url == 'inf'):  
+                    int_counter = int(counter)
+                    cut = (int_counter - 20 + 23 - 160)
+                else:
+                    int_counter = int(counter)
+                    cut = (int_counter - 20 + 24 - 160)
+
                 abs_cut = abs(cut)
-                print(abs_cut)
-                #line[4] = sms_content.replace(civilite, line[0])
-                #line[4] = sms_content.replace(nom, line[1])
                 line[0] = line[0][0:abs_cut]
+                line[4] = line[4].replace('aud', short_url)
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0])
                
                 if count < 50000 :
