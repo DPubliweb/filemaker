@@ -203,13 +203,15 @@ def upload_file():
                     print("Salut",file)
             print("Salut", filenames)
             print('all file finish')
-
+       
 
         return render_template("content.html")
-
+    
     else:
         flash('Allowed file types are only csv')
         return redirect(request.url)
+
+
 
 
 @app.route('/zipped_data')
@@ -264,13 +266,6 @@ def zipped_data_2():
                             zipf.write(os.path.join(root, file))
                             #os.remove(file_path)
     memory_file.seek(0)
-
-    filenames = next(walk(os.path.abspath("excel")), (None, None, []))[2]  # [] if no file
-    for file in filenames:
-                if (file != ".DS_Store"):
-                    file_path_del = (os.path.abspath("excel/"+file))
-                    os.remove(file_path_del)
-
     filenames2 = next(walk(os.path.abspath("final")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
                 if (file != ".DS_Store"):
@@ -317,7 +312,7 @@ def sms_write():
             lien = "{lien}"
             print(short_url)
 
-            workbook = xlsxwriter.Workbook(os.path.abspath('excel/'+name+'.xlsx'))
+            workbook = xlsxwriter.Workbook(os.path.abspath('final/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
 
             for line in csv_reader_all:
@@ -355,14 +350,6 @@ def sms_write():
              count_str = str(count)
             print(count)
             workbook.close()
-            filenames = next(walk(os.path.abspath("excel")), (None, None, []))[2]  # [] if no file
-            for file in filenames:
-                if (file != ".DS_Store"):
-                    read_file = pd.read_excel('excel/'+file)
-                    file = file[:-4]
-                    read_file.to_csv("final/"+file+"csv", index=None, header=True)
-            print("Salut", filenames)
-            print('all file finish')
 
         return render_template("content_sms.html")
         

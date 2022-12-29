@@ -30,7 +30,7 @@ form {
 
 @media screen and (max-width: 950px) {
   form {
-    margin-top:0px;
+    margin-top:0px !important;
   }
 }
 
