@@ -339,7 +339,7 @@ def sms_write():
                 abs_cut = abs(cut)
                 line[0] = line[0][0:abs_cut]
                 line[4] = line[4].replace('aud', short_url)
-                line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0])
+                line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0]).replace('\r\n','\n')
                
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[3])
