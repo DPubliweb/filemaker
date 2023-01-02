@@ -57,6 +57,10 @@ def login():
 def refused():
     return render_template('refused.html')
 
+@app.route('/b2b')
+def b2b():
+    return render_template('b2b.html')
+
 @app.route('/upload')
 def upload_form():
     print(session.get('completed', None))
@@ -212,6 +216,111 @@ def upload_file():
         return redirect(request.url)
 
 
+@app.route('/upload_b2b', methods=['GET','POST'])
+def upload_b2b():
+    if request.method == 'POST':
+        render_template('content.html')
+    # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        utm = request.form['utm']
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            count = 0
+            #flag_input = request.form['flag']
+            name = request.form['name']
+            #flag = int(flag_input)
+            link = request.form['link']
+            link_cutted = link[38:46]
+
+            line_count = 0
+
+            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
+            worksheet = workbook.add_worksheet()
+
+            for line in csv_reader_all:
+             if(count == 0):
+                first_line = line
+                #writer.writerow(line)
+                worksheet.write(0,0,first_line[0])
+                worksheet.write(0,1, first_line[1])
+                worksheet.write(0,2, first_line[2])
+                worksheet.write(0,3, first_line[3])
+                worksheet.write(0,4, first_line[4])
+                worksheet.write(0,5, first_line[5])
+                worksheet.write(0,6, first_line[6])
+                worksheet.write(0,7, first_line[7])
+                worksheet.write(0,8, first_line[8])
+                worksheet.write(0,9, first_line[9])
+
+             else:
+
+                line[9] = utm
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[9]+"&address="+line[2]+"&company="+line[0]+"&email="+line[1]+"&tel_fixe="+line[6]+"&tel_mobile="+line[3]+"&website="+line[8]+"&city="+line[5]+"&zipcode="+line[7]
+               
+                if count < 50000 :
+                    worksheet.write(line_count, 0, line[0])
+                    worksheet.write(line_count, 1, line[1])
+                    worksheet.write(line_count, 2, line[2])
+                    worksheet.write(line_count, 3, line[3])
+                    worksheet.write(line_count, 4, line[4])
+                    worksheet.write(line_count, 5, line[5])
+                    worksheet.write(line_count, 6, line[6])
+                    worksheet.write(line_count, 7, line[7])
+                    worksheet.write(line_count, 8, line[8])
+        
+             count = count + 1
+             line_count = line_count +1
+             count_str = str(count)
+            print(count)
+            if count <= 50001 :
+                workbook.close()
+            
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            print(filenames)
+            count = 0
+            for file in filenames:
+                if (file != ".DS_Store"):
+                    count = count + 1
+                    print("start " + file)
+                    sample_file = open("parsed/" + file, "rb")
+                    upload_file = {"xlsxFile": sample_file}
+                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
+        
+                    if r.status_code == 200:
+                        print("finish parsed_" + file)
+                        with open(os.path.abspath("parsed/"+file), "wb") as f:
+                            f.write(r.content)
+                    else:
+                        print(r.status_code)
+                        print(r.content)
+        
+                else:
+                    print(file)
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
+            for file in filenames:
+                if (file != ".DS_Store"):
+                    read_file = pd.read_excel('parsed/'+file)
+                    file = file[:-4]
+                    read_file.to_csv("ready/"+file+"csv", index=None, header=True)
+                    print("Salut",file)
+            print("Salut", filenames)
+            print('all file finish')
+
+
+        return render_template("content.html")
+    
+    else:
+        flash('Allowed file types are only csv')
+        return redirect(request.url)
 
 
 @app.route('/zipped_data')

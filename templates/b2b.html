@@ -1,0 +1,115 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script>
+             let play = function(){document.getElementById("audio").play()}
+    </script>
+
+    <title>Publiweb File Maker</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        margin-top: -60
+    }
+
+    #gradient-canvas {
+        --gradient-color-1: #b365d6;
+        --gradient-color-2: #b3cdf4;
+        --gradient-color-3: #ee343f;
+        --gradient-color-4: #fac15a;
+    }
+</style>
+
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+    <script>
+        function play() {
+            var audio = document.getElementById("audio");
+            audio.play();
+        }</script>
+
+    <section class="section_top">
+        <div class="section-container">
+            <div class="section-layout-container container-medium with-padding">
+                <div class="section-layout">
+                    <div class="gradient-area">
+                        <div class="gradient-title-area">
+                            <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                                <div class="top_page"><h1>Publiweb File Maker - B2B</h1>
+                                <nav class="navMenu">
+                                    <a href="/sms">SMS</a>
+                                    <div class="dot"></div>
+                                  </nav>
+                                  </div>
+                              </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <body>
+    <form method="POST" enctype="multipart/form-data" action="/upload_b2b">
+            <div class="formbg-outer">
+                <div class="formbg">
+                  <div class="formbg-inner padding-horizontal--48">
+                <dl>
+                    <div class="field padding-bformbgottom--24">
+                    <p>
+                        <label for="utm" style="font-weight: 500;">Utm source : </label>
+                        <input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
+                    </p>
+                    <p>
+                        <label for="name" style="font-weight: 500;">Nom du fichier : </label>
+                        <input type="text" name="name" autocomplete="off" required>
+                    </p>
+                    <p>
+                        <label for="link" style="font-weight: 500;">Lien du typeform : </label>
+                        <input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
+                    </p>
+
+                    <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le
+                        fichier à traiter </label>
+                    <input class="file_upload" type="file" name="file" autocomplete="off" required>
+
+                    <p style='text-align: center;'>
+                        <button type="submit" class="button-85" role="button" value="PLAY" onclick="play()">Envoyer
+                        </button>
+                        <audio id="audio" src="https://www.publiwebsms.com/wp-content/uploads/2022/12/Elevator-Music.mp3"></audio>
+                    </p>
+                </div>
+                </dl>
+            </div>
+        </div>
+</div>        
+    </form>
+
+    <pre>{{content}}</pre>
+    <p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+    <div class=flashes>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    </p>
+
+</body>
