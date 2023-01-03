@@ -181,7 +181,7 @@ def upload_file():
             print(filenames)
             count = 0
             for file in filenames:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     count = count + 1
                     print("start " + file)
                     sample_file = open("parsed/" + file, "rb")
@@ -200,7 +200,7 @@ def upload_file():
                     print(file)
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html" ):
                     read_file = pd.read_excel('parsed/'+file)
                     file = file[:-4]
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
@@ -288,7 +288,7 @@ def upload_b2b():
             print(filenames)
             count = 0
             for file in filenames:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     count = count + 1
                     print("start " + file)
                     sample_file = open("parsed/" + file, "rb")
@@ -307,7 +307,7 @@ def upload_b2b():
                     print(file)
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     read_file = pd.read_excel('parsed/'+file)
                     file = file[:-4]
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
@@ -334,23 +334,23 @@ def zipped_data():
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
-                        if (file != ".DS_Store"):
+                        if (file != ".DS_Store" & file != "text.html"):
                             zipf.write(os.path.join(root, file))
                             #os.remove(file_path)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     file_path_del_2 = (os.path.abspath("parsed/"+file))
                     os.remove(file_path_del_2)
     filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
     for file in filenames3:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     file_path_del_3 = (os.path.abspath("uploads/"+file))
                     os.remove(file_path_del_3)
     filenames4 = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
     for file in filenames4:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     file_path_del_4 = (os.path.abspath("ready/"+file))
                     os.remove(file_path_del_4)
     
@@ -371,18 +371,18 @@ def zipped_data_2():
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
           for root, dirs, files in os.walk(file_path):
                     for file in files:
-                        if (file != ".DS_Store"):
+                        if (file != ".DS_Store" & file != "text.html"):
                             zipf.write(os.path.join(root, file))
                             #os.remove(file_path)
     memory_file.seek(0)
     filenames2 = next(walk(os.path.abspath("final")), (None, None, []))[2]  # [] if no file
     for file in filenames2:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     file_path_del_2 = (os.path.abspath("final/"+file))
                     os.remove(file_path_del_2)
     filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
     for file in filenames3:
-                if (file != ".DS_Store"):
+                if (file != ".DS_Store" & file != "text.html"):
                     file_path_del_3 = (os.path.abspath("uploads/"+file))
                     os.remove(file_path_del_3)
 
