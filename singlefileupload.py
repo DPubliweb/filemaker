@@ -110,7 +110,7 @@ def upload_file():
              if(count == 0):
                 first_line = line
                 #writer.writerow(line)
-                worksheet.write(0,0,first_line[0] )
+                worksheet.write(0,0,first_line[0])
                 worksheet.write(0,1, first_line[1])
                 worksheet.write(0,2, first_line[2])
                 worksheet.write(0,3, first_line[3])
