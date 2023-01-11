@@ -204,7 +204,6 @@ def upload_file():
                     read_file = pd.read_excel('parsed/'+file)
                     file = file[:-4]
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
-                    print("Salut",file)
             print("Salut", filenames)
             print('all file finish')
 
