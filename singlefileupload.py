@@ -223,7 +223,7 @@ def upload_file():
         return redirect(request.url)
 
 @app.route('/upload_lea', methods=['GET','POST'])
-def upload_file():
+def upload_file_lea():
     if request.method == 'POST':
         render_template('content.html')
     # check if the post request has the file part
