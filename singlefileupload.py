@@ -608,7 +608,40 @@ def sms_write():
     else:
         flash('Allowed file types are only csv!')
         return redirect(request.url)
+    
 
+@app.route('/dedouble', methods=['GET','POST'])
+def upload_file():
+    if request.method == 'POST':
+        render_template('content.html')
+    # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        column = request.form['column']
+        keep = request.form['keep']
+        keep_2 = ""
+        if file.filename == '':
+            flash('No file selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file = open(app.config['UPLOAD_FOLDER'] + '/'+filename,"r")
+            csv_reader_all = csv.reader(open(app.config['UPLOAD_FOLDER'] + '/'+filename, 'r', encoding='UTF-8'), delimiter=';')
+            if keep == 'Oui':
+                keep_2 == 'first'
+            else:
+                keep_2 == False
+            df = csv_reader_all[(~csv_reader_all[column].duplicated(keep = keep_2 )) | csv_reader_all[column].isna()]
+            df.to_csv("ready/"+file+"csv", index=None, header=True)
+
+        return render_template("content.html")
+    
+    else:
+        flash('Allowed file types are only csv')
+        return redirect(request.url)
 
 
 if __name__ == "__main__":
