@@ -611,7 +611,7 @@ def sms_write():
     
 
 @app.route('/dedouble', methods=['GET','POST'])
-def upload_file():
+def dedouble_file():
     if request.method == 'POST':
         render_template('content.html')
     # check if the post request has the file part
