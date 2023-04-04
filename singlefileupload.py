@@ -613,7 +613,7 @@ def sms_write():
 @app.route('/dedouble', methods=['GET','POST'])
 def dedouble_file():
     if request.method == 'POST':
-        render_template('content.html')
+        render_template('content_dedouble.html')
     # check if the post request has the file part
         if 'file' not in request.files:
             flash('No file part')
@@ -637,7 +637,7 @@ def dedouble_file():
             df = csv_reader_all[(~csv_reader_all[column].duplicated(keep = keep_2 )) | csv_reader_all[column].isna()]
             df.to_csv("ready/"+file+"csv", index=None, header=True)
 
-        return render_template("content.html")
+        return render_template("content_dedouble.html")
     
     else:
         flash('Allowed file types are only csv')
