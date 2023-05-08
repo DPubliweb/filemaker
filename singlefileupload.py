@@ -111,8 +111,33 @@ def upload_file():
 
             line_count = 0
 
-            workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
-            worksheet = workbook.add_worksheet()
+            if count < 25000 :
+               workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
+               worksheet = workbook.add_worksheet()
+            elif count > 25000 and count <= 50001:
+               workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
+               worksheet = workbook.add_worksheet()
+               workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p2.xlsx'))
+               worksheet1 = workbook1.add_worksheet()
+            elif count > 50001 and count <= 75000:
+               workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
+               worksheet = workbook.add_worksheet()
+               workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p2.xlsx'))
+               worksheet1 = workbook1.add_worksheet()
+               workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p3.xlsx'))
+               worksheet2 = workbook2.add_worksheet()
+            elif count > 75001 and count <= 100000:
+               workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
+               worksheet = workbook.add_worksheet()
+               workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p2.xlsx'))
+               worksheet1 = workbook1.add_worksheet()
+               workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p3.xlsx'))
+               worksheet2 = workbook2.add_worksheet()
+               workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p4.xlsx'))
+               worksheet3 = workbook3.add_worksheet()
+            
+                
+
 
             for line in csv_reader_all:
              if(count == 0):
@@ -162,12 +187,12 @@ def upload_file():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "5")
+                code = ran.replace ("0", "2")
                 line[8] = str(code)
                 line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
                
-                if count < 50000 :
+                if count < 25000 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
                     worksheet.write(line_count, 2, line[2])
@@ -177,13 +202,55 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
-        
+                elif count > 25001 and count <= 50001:
+                    worksheet1.write(line_count, 0, line[0])
+                    worksheet1.write(line_count, 1, line[1])
+                    worksheet1.write(line_count, 2, line[2])
+                    worksheet1.write(line_count, 3, line[3])
+                    worksheet1.write(line_count, 4, line[4])
+                    worksheet1.write(line_count, 5, line[5])
+                    worksheet1.write(line_count, 6, line[6])
+                    worksheet1.write(line_count, 7, line[7])
+                    worksheet1.write(line_count, 8, line[8])
+                elif count > 50001 and count <= 75001:
+                    worksheet2.write(line_count, 0, line[0])
+                    worksheet2.write(line_count, 1, line[1])
+                    worksheet2.write(line_count, 2, line[2])
+                    worksheet2.write(line_count, 3, line[3])
+                    worksheet2.write(line_count, 4, line[4])
+                    worksheet2.write(line_count, 5, line[5])
+                    worksheet2.write(line_count, 6, line[6])
+                    worksheet2.write(line_count, 7, line[7])
+                    worksheet2.write(line_count, 8, line[8])
+                elif count > 75001 and count <= 100001:
+                    worksheet3.write(line_count, 0, line[0])
+                    worksheet3.write(line_count, 1, line[1])
+                    worksheet3.write(line_count, 2, line[2])
+                    worksheet3.write(line_count, 3, line[3])
+                    worksheet3.write(line_count, 4, line[4])
+                    worksheet3.write(line_count, 5, line[5])
+                    worksheet3.write(line_count, 6, line[6])
+                    worksheet3.write(line_count, 7, line[7])
+                    worksheet3.write(line_count, 8, line[8])
+
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
             print(count)
-            if count <= 50001 :
+            if count <= 25001 :
                 workbook.close()
+            elif count > 25001 and count <= 50001:
+                workbook.close()
+                workbook1.close()
+            elif count > 50001 and count <= 75001:
+                workbook.close()
+                workbook1.close()
+                workbook2.close()
+            elif count > 75001 and count <= 100001:
+                workbook.close()
+                workbook1.close()
+                workbook2.close()
+                workbook3.close()
             
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)
