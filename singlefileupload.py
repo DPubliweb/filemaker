@@ -110,6 +110,7 @@ def upload_file():
             link_cutted = link[38:46]
 
             line_count = 0
+            more_than = 0
 
             if count < 25000 :
                workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
@@ -119,6 +120,7 @@ def upload_file():
                worksheet = workbook.add_worksheet()
                workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p2.xlsx'))
                worksheet1 = workbook1.add_worksheet()
+               more_than = 1
             elif count > 50001 and count <= 75000:
                workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
                worksheet = workbook.add_worksheet()
@@ -126,6 +128,7 @@ def upload_file():
                worksheet1 = workbook1.add_worksheet()
                workbook2 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p3.xlsx'))
                worksheet2 = workbook2.add_worksheet()
+               more_than = 1
             elif count > 75001 and count <= 100000:
                workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
                worksheet = workbook.add_worksheet()
@@ -135,6 +138,7 @@ def upload_file():
                worksheet2 = workbook2.add_worksheet()
                workbook3 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p4.xlsx'))
                worksheet3 = workbook3.add_worksheet()
+               more_than = 1
             
                 
 
@@ -189,7 +193,18 @@ def upload_file():
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "2")
                 line[8] = str(code)
-                line[6] = utm
+                if count < 25000 :
+                   if more_than == 0:
+                       line[6] = utm
+                   else:
+                       line[6] = utm+".p1"
+                elif count > 25000 and count <= 50001:
+                   line[6] = utm+".p2"
+                elif count > 50001 and count <= 75000:
+                    line[6] = utm+".p3"
+                elif count > 75000 and count <= 10001:
+                    line[6] = utm+".p4"
+
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
                
                 if count < 25000 :
