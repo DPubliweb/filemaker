@@ -217,7 +217,7 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
-                elif count > 25001 and count <= 50001:
+                elif count > 25000 and count <= 50001:
                     worksheet1.write(line_count, 0, line[0])
                     worksheet1.write(line_count, 1, line[1])
                     worksheet1.write(line_count, 2, line[2])
