@@ -112,10 +112,10 @@ def upload_file():
             line_count = 0
             more_than = 0
 
-            if count < 25000 :
+            if count < 40000 :
                workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.xlsx'))
                worksheet = workbook.add_worksheet()
-            elif count > 25000 and count <= 50001:
+            elif count > 40000 and count <= 50001:
                workbook = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p1.xlsx'))
                worksheet = workbook.add_worksheet()
                workbook1 = xlsxwriter.Workbook(os.path.abspath('parsed/'+name+'.p2.xlsx'))
@@ -198,7 +198,7 @@ def upload_file():
                        line[6] = utm
                    else:
                        line[6] = utm+".p1"
-                elif count > 25000 and count <= 50001:
+                elif count > 40000 and count <= 50001:
                    line[6] = utm+".p2"
                 elif count > 50001 and count <= 75000:
                     line[6] = utm+".p3"
@@ -207,7 +207,7 @@ def upload_file():
 
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
                
-                if count < 25000 :
+                if count < 40000 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
                     worksheet.write(line_count, 2, line[2])
@@ -217,7 +217,7 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
-                elif count > 25000 and count <= 50001:
+                elif count > 40000 and count <= 50001:
                     worksheet1.write(line_count, 0, line[0])
                     worksheet1.write(line_count, 1, line[1])
                     worksheet1.write(line_count, 2, line[2])
