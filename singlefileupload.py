@@ -217,44 +217,44 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
-                elif count > 40000 and count <= 50001:
-                    worksheet1.write(line_count, 0, line[0])
-                    worksheet1.write(line_count, 1, line[1])
-                    worksheet1.write(line_count, 2, line[2])
-                    worksheet1.write(line_count, 3, line[3])
-                    worksheet1.write(line_count, 4, line[4])
-                    worksheet1.write(line_count, 5, line[5])
-                    worksheet1.write(line_count, 6, line[6])
-                    worksheet1.write(line_count, 7, line[7])
-                    worksheet1.write(line_count, 8, line[8])
-                elif count > 50001 and count <= 75001:
-                    worksheet2.write(line_count, 0, line[0])
-                    worksheet2.write(line_count, 1, line[1])
-                    worksheet2.write(line_count, 2, line[2])
-                    worksheet2.write(line_count, 3, line[3])
-                    worksheet2.write(line_count, 4, line[4])
-                    worksheet2.write(line_count, 5, line[5])
-                    worksheet2.write(line_count, 6, line[6])
-                    worksheet2.write(line_count, 7, line[7])
-                    worksheet2.write(line_count, 8, line[8])
-                elif count > 75001 and count <= 100001:
-                    worksheet3.write(line_count, 0, line[0])
-                    worksheet3.write(line_count, 1, line[1])
-                    worksheet3.write(line_count, 2, line[2])
-                    worksheet3.write(line_count, 3, line[3])
-                    worksheet3.write(line_count, 4, line[4])
-                    worksheet3.write(line_count, 5, line[5])
-                    worksheet3.write(line_count, 6, line[6])
-                    worksheet3.write(line_count, 7, line[7])
-                    worksheet3.write(line_count, 8, line[8])
+                #elif count > 40000 and count <= 50001:
+                #    worksheet1.write(line_count, 0, line[0])
+                #    worksheet1.write(line_count, 1, line[1])
+                #    worksheet1.write(line_count, 2, line[2])
+                #    worksheet1.write(line_count, 3, line[3])
+                #    worksheet1.write(line_count, 4, line[4])
+                #    worksheet1.write(line_count, 5, line[5])
+                #    worksheet1.write(line_count, 6, line[6])
+                #    worksheet1.write(line_count, 7, line[7])
+                #    worksheet1.write(line_count, 8, line[8])
+                #elif count > 50001 and count <= 75001:
+                #    worksheet2.write(line_count, 0, line[0])
+                #    worksheet2.write(line_count, 1, line[1])
+                #    worksheet2.write(line_count, 2, line[2])
+                #    worksheet2.write(line_count, 3, line[3])
+                #    worksheet2.write(line_count, 4, line[4])
+                #    worksheet2.write(line_count, 5, line[5])
+                #    worksheet2.write(line_count, 6, line[6])
+                #    worksheet2.write(line_count, 7, line[7])
+                #    worksheet2.write(line_count, 8, line[8])
+                #elif count > 75001 and count <= 100001:
+                #    worksheet3.write(line_count, 0, line[0])
+                #    worksheet3.write(line_count, 1, line[1])
+                #    worksheet3.write(line_count, 2, line[2])
+                #    worksheet3.write(line_count, 3, line[3])
+                #    worksheet3.write(line_count, 4, line[4])
+                #    worksheet3.write(line_count, 5, line[5])
+                #    worksheet3.write(line_count, 6, line[6])
+                #    worksheet3.write(line_count, 7, line[7])
+                #    worksheet3.write(line_count, 8, line[8])
 
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
             print(count)
-            if count <= 25001 :
+            if count <= 40000 :
                 workbook.close()
-            elif count > 25001 and count <= 50001:
+            elif count > 40000 and count <= 50001:
                 workbook.close()
                 workbook1.close()
             elif count > 50001 and count <= 75001:
