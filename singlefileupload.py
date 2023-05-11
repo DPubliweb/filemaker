@@ -156,6 +156,7 @@ def upload_file():
                 worksheet.write(0,6, first_line[6])
                 worksheet.write(0,7, first_line[7])
                 worksheet.write(0,8, first_line[8])
+                worksheet.write(0,9, first_line[9])
 
              else:
                 if line[5] == 'Mme':
@@ -205,7 +206,7 @@ def upload_file():
                 elif count > 75000 and count <= 10001:
                     line[6] = utm+".p4"
 
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"cohort="+line[9]
                
                 if count < 40000 :
                     worksheet.write(line_count, 0, line[0])
@@ -217,6 +218,7 @@ def upload_file():
                     worksheet.write(line_count, 6, line[6])
                     worksheet.write(line_count, 7, line[7])
                     worksheet.write(line_count, 8, line[8])
+                    worksheet.write(line_count, 9, line[9])
                 #elif count > 40000 and count <= 50001:
                 #    worksheet1.write(line_count, 0, line[0])
                 #    worksheet1.write(line_count, 1, line[1])
