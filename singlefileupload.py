@@ -194,7 +194,7 @@ def upload_file():
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "2")
                 line[8] = str(code)
-                if count < 25000 :
+                if count < 40000 :
                    if more_than == 0:
                        line[6] = utm
                    else:
