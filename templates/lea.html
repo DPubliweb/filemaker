@@ -59,7 +59,7 @@
     </div>
     </section>
     <body>
-    <form method="POST" enctype="multipart/form-data" action="/lea_upload">
+        <form method="POST" enctype="multipart/form-data" action="/upload_lea">
             <div class="formbg-outer">
                 <div class="formbg">
                   <div class="formbg-inner padding-horizontal--48">
@@ -73,6 +73,11 @@
                         <label for="name" style="font-weight: 500;">Nom du fichier : </label>
                         <input type="text" name="name" autocomplete="off" required>
                     </p>
+                    <p>
+                        <label for="link" style="font-weight: 500;">Lien du typeform : </label>
+                        <input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
+                    </p>
+
                     <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le
                         fichier à traiter </label>
                     <input class="file_upload" type="file" name="file" autocomplete="off" required>
