@@ -49,7 +49,7 @@
                     <div class="gradient-area">
                         <div class="gradient-title-area">
                             <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
-                                <div class="top_page"><h1>Publiweb File Maker</h1>
+                                <div class="top_page"><h1>Publiweb File Maker - B2B</h1>
                                 <nav class="navMenu">
                                     <a href="/sms">SMS</a>
                                     <div class="dot"></div>
@@ -63,7 +63,7 @@
     </div>
     </section>
     <body>
-    <form method="POST" enctype="multipart/form-data" action="/upload">
+    <form method="POST" enctype="multipart/form-data" action="/upload_b2b">
             <div class="formbg-outer">
                 <div class="formbg">
                   <div class="formbg-inner padding-horizontal--48">
@@ -97,4 +97,19 @@
         </div>
 </div>        
     </form>
+
+    <pre>{{content}}</pre>
+    <p>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+    <div class=flashes>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    </p>
+
 </body>

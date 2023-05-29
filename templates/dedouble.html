@@ -49,7 +49,7 @@
                     <div class="gradient-area">
                         <div class="gradient-title-area">
                             <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
-                                <div class="top_page"><h1>Publiweb File Maker</h1>
+                                <div class="top_page"><h1>Suppression de doublons</h1>
                                 <nav class="navMenu">
                                     <a href="/sms">SMS</a>
                                     <div class="dot"></div>
@@ -63,25 +63,23 @@
     </div>
     </section>
     <body>
-    <form method="POST" enctype="multipart/form-data" action="/upload">
+    <form method="POST" enctype="multipart/form-data" action="/dedouble">
             <div class="formbg-outer">
                 <div class="formbg">
                   <div class="formbg-inner padding-horizontal--48">
                 <dl>
                     <div class="field padding-bformbgottom--24">
                     <p>
-                        <label for="utm" style="font-weight: 500;">Utm source : </label>
+                        <label for="utm" style="font-weight: 500;">Nom de la colonne à dédoubler : </label>
                         <input type="text" name="utm" autocomplete="off" required placeholder="dd.mm.yy.(volume)k">
                     </p>
                     <p>
-                        <label for="name" style="font-weight: 500;">Nom du fichier : </label>
-                        <input type="text" name="name" autocomplete="off" required>
-                    </p>
-                    <p>
-                        <label for="link" style="font-weight: 500;">Lien du typeform : </label>
-                        <input type="text" name="link" autocomplete="off" required style="margin-right: 3px">
-                    </p>
-
+                        <label for="name" style="font-weight: 500;">Garder les doublons : </label> 
+                        <select name="short_url" id="short_url" name="short_url">
+                            <option value="Oui">Oui</option>
+                            <option value="Non">Non</option>
+                          </select>
+                        </p>
                     <label for="file" style="font-weight: 500; margin-bottom: 30px; margin-top: 10px;">Sélectionnez le
                         fichier à traiter </label>
                     <input class="file_upload" type="file" name="file" autocomplete="off" required>
