@@ -317,23 +317,23 @@ def upload_file_lea():
                     ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                     code = ran.replace ("0", "2")
                     line[8] = str(code)
-                    if count < 30000 :
+                    if count < 50000 :
                        if more_than == 0:
                            line[6] = utm
                        else:
                            line[6] = utm+".p1"
-                    elif count > 30000 and count <= 60001:
+                    elif count > 50000 and count <= 100001:
                        line[6] = utm+".p2"
-                    elif count > 60001 and count <= 90000:
+                    elif count > 100001 and count <= 150001:
                         line[6] = utm+".p3"
-                    elif count > 90000 and count <= 120001:
+                    elif count > 150001 and count <= 200001:
                         line[6] = utm+".p4"
-                    elif count > 120001 and count <= 150001:
+                    elif count > 200001 and count <= 250001:
                         line[6] = utm+".p5"
     
                     line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
                    
-                    if count < 30000 :
+                    if count < 50000 :
                         worksheet.write(line_count, 0, line[0])
                         worksheet.write(line_count, 1, line[1])
                         worksheet.write(line_count, 2, line[2])
@@ -344,7 +344,7 @@ def upload_file_lea():
                         worksheet.write(line_count, 7, line[7])
                         worksheet.write(line_count, 8, line[8])
                         worksheet.write(line_count, 9, line[9])
-                    elif count > 30000 and count <= 60001:
+                    elif count > 50000 and count <= 100001:
                         worksheet1.write(line_count, 0, line[0])
                         worksheet1.write(line_count, 1, line[1])
                         worksheet1.write(line_count, 2, line[2])
@@ -354,7 +354,7 @@ def upload_file_lea():
                         worksheet1.write(line_count, 6, line[6])
                         worksheet1.write(line_count, 7, line[7])
                         worksheet1.write(line_count, 8, line[8])
-                    elif count > 60001 and count <= 90001:
+                    elif count > 100001 and count <= 150001:
                         worksheet2.write(line_count, 0, line[0])
                         worksheet2.write(line_count, 1, line[1])
                         worksheet2.write(line_count, 2, line[2])
@@ -364,7 +364,7 @@ def upload_file_lea():
                         worksheet2.write(line_count, 6, line[6])
                         worksheet2.write(line_count, 7, line[7])
                         worksheet2.write(line_count, 8, line[8])
-                    elif count > 90001 and count <= 120001:
+                    elif count > 150001 and count <= 200001:
                         worksheet3.write(line_count, 0, line[0])
                         worksheet3.write(line_count, 1, line[1])
                         worksheet3.write(line_count, 2, line[2])
@@ -374,7 +374,7 @@ def upload_file_lea():
                         worksheet3.write(line_count, 6, line[6])
                         worksheet3.write(line_count, 7, line[7])
                         worksheet3.write(line_count, 8, line[8])
-                    elif count > 120001 and count <= 150001:
+                    elif count > 200001 and count <= 250001:
                         worksheet4.write(line_count, 0, line[0])
                         worksheet4.write(line_count, 1, line[1])
                         worksheet4.write(line_count, 2, line[2])
@@ -389,21 +389,21 @@ def upload_file_lea():
                  line_count = line_count +1
                  count_str = str(count)
                 print(count)
-                if count <= 30000 :
+                if count <= 50000 :
                     workbook.close()
-                elif count > 30000 and count <= 60001:
+                elif count > 50000 and count <= 100001:
                     workbook.close()
                     workbook1.close()
-                elif count > 60001 and count <= 90001:
+                elif count > 100001 and count <= 150001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
-                elif count > 90001 and count <= 120001:
+                elif count > 150001 and count <= 200001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
                     workbook3.close()
-                elif count > 120001 and count <= 150001:
+                elif count > 200001 and count <= 250001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
