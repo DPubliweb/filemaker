@@ -47,7 +47,7 @@ def login():
     session['completed'] = False
     identifiant = request.form['identifiant']
     password = request.form['password']
-    if (identifiant == 'contact@publiweb.agency' and password == ' x'):
+    if (identifiant == 'contact@publiweb.agency' and password == 'Nanah148148'):
         session['completed'] = True
         return render_template('upload.html')
     else:
