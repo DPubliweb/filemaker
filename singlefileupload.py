@@ -184,7 +184,7 @@ def upload_file():
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
-             workbook.close()
+            workbook.close()
 
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)
