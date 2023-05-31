@@ -207,9 +207,11 @@ def upload_file():
         
                 else:
                     print(file)
+            
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
                 if (file != ".DS_Store" and file != "text.html" ):
+                    print(file, 'HEY')
                     read_file = pd.read_excel('parsed/'+file)
                     file = file[:-4]
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
