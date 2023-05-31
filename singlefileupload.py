@@ -666,6 +666,8 @@ def sms_write():
                 worksheet.write(0,6,first_line[6])
                 worksheet.write(0,7,first_line[7])
                 worksheet.write(0,8,first_line[8])
+                worksheet.write(0,9,first_line[9])
+
              else:
                 if(short_url == 'aud' or short_url == 'inf'):  
                     int_counter = int(counter)
