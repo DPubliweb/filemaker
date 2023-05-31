@@ -213,7 +213,9 @@ def upload_file():
                 if (file != ".DS_Store" and file != "text.html" ):
                     print(file, 'HEY')
                     read_file = pd.read_excel('parsed/'+file)
+                    print(read_file, 'HEY2')
                     file = file[:-4]
+                    print(file, 'HEY3')
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
             print("Salut", filenames)
             print('all file finish')
