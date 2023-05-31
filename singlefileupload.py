@@ -622,6 +622,7 @@ def zipped_data_2():
                      attachment_filename=fileName,
                      as_attachment=True)
 
+
 @app.route('/sms_write', methods=['GET','POST'])
 def sms_write():
     if request.method == 'POST':
