@@ -164,27 +164,27 @@ def upload_file():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "3")
+                code = ran.replace ("0", "2")
                 line[8] = str(code)
                 line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
                
-                if count < 50000:
-                    worksheet.write(line_count, 0, line[0])
-                    worksheet.write(line_count, 1, line[1])
-                    worksheet.write(line_count, 2, line[2])
-                    worksheet.write(line_count, 3, line[3])
-                    worksheet.write(line_count, 4, line[4])
-                    worksheet.write(line_count, 5, line[5])
-                    worksheet.write(line_count, 6, line[6])
-                    worksheet.write(line_count, 7, line[7])
-                    worksheet.write(line_count, 8, line[8])
-                    worksheet.write(line_count, 9, line[9])
+                
+                worksheet.write(line_count, 0, line[0])
+                worksheet.write(line_count, 1, line[1])
+                worksheet.write(line_count, 2, line[2])
+                worksheet.write(line_count, 3, line[3])
+                worksheet.write(line_count, 4, line[4])
+                worksheet.write(line_count, 5, line[5])
+                worksheet.write(line_count, 6, line[6])
+                worksheet.write(line_count, 7, line[7])
+                worksheet.write(line_count, 8, line[8])
+                worksheet.write(line_count, 9, line[9])
                
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
-            workbook.close()
+             workbook.close()
 
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)
@@ -332,7 +332,6 @@ def upload_file_lea():
                         line[6] = utm+".p5"
     
                     line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
-
                    
                     if count < 50000 :
                         worksheet.write(line_count, 0, line[0])
