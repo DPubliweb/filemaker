@@ -515,10 +515,6 @@ function normalizeColor(hexCode) {
     alert("Copied the text: " + copyText.value);
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
   /*
   *Finally initializing the Gradient class, assigning a canvas to it and calling Gradient.connect() which initializes everything,
