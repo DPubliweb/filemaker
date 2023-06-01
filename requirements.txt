@@ -32,7 +32,7 @@ oauth2client==4.1.3
 oauthlib==3.2.2
 openpyxl==3.0.10
 panda==0.3.1
-pandas==1.5.2
+pandas==2.0.2
 platformdirs==2.6.2
 protobuf==4.21.12
 psycopg2-binary==2.9.3
@@ -54,6 +54,7 @@ selenium==3.141.0
 six==1.16.0
 tblib==1.7.0
 tornado==4.5.3
+tzdata==2023.3
 u-msgpack-python==2.7.1
 uritemplate==4.1.1
 urllib3==1.26.6
