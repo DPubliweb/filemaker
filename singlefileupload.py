@@ -736,6 +736,41 @@ def dedouble_file():
     else:
         flash('Allowed file types are only csv')
         return redirect(request.url)
+    
+@app.route('/campaign', methods=['POST'])
+def get_campaign_clicks():
+    campaign_name = request.form['campaign_name']
+    print(campaign_name)
+    response = requests.get(f'https://aud.vc/campaign/{campaign_name}/clicks')
+    print(response)
+
+    if response.status_code == 200:
+        response_text = response.text
+        response_data = dict(line.split(': ') for line in response_text.split('\n'))
+        
+        # Now you can access the data like this:
+        clicks = response_data['Total clicks for campaign Dreamteam-0206']
+        links = response_data['Total links for campaign Dreamteam-0206']
+        click_rate = response_data['Click rate for campaign Dreamteam-0206']
+
+        clicks = int(clicks)
+        links = int(links)
+        click_rate = float(click_rate)
+    else:
+        # Handle error
+        pass
+
+    # Here you would add your logic to get data for the campaign
+    return render_template('campaign.html', 
+                           campaign_name=campaign_name, 
+                           clicks=clicks, 
+                           links=links, 
+                           click_rate=click_rate)
+
+
+@app.route('/rapport')
+def input():
+    return render_template('rapport.html')
 
 
 if __name__ == "__main__":

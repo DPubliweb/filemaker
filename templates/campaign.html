@@ -1,0 +1,87 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script>
+             let play = function(){document.getElementById("audio").play()}
+    </script>
+
+    <title>Demande de rapport de campagne</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        margin-top: -60
+    }
+
+    #gradient-canvas {
+        --gradient-color-1: #b365d6;
+        --gradient-color-2: #b3cdf4;
+        --gradient-color-3: #ee343f;
+        --gradient-color-4: #fac15a;
+    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    display: flex;
+    justify-content: center;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #080808;
+    color: white;
+}
+</style>
+</head>
+<body>
+    <body>
+        <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+        <script>
+            var gradient = new Gradient()
+            gradient.initGradient('#gradient-canvas');
+        </script>
+        <section class="section_top">
+            <div class="section-container">
+                <div class="section-layout-container container-medium with-padding">
+                    <div class="section-layout">
+                        <div class="gradient-area">
+                            <div class="gradient-title-area">
+                                <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                                    <div class="top_page"><h1>Rapport de campagne</h1>
+                                      </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        <table>
+            <tr>
+                <th>Nom de la campagne</th>
+                <th>SMS envoyés</th>
+                <th>Nombre de clics</th>
+                <th>Taux de clics (%)</th>
+            </tr>
+            <tr>
+                <td>{{ campaign_name }}</td>
+                <td>{{ links }}</td>
+                <td>{{ clicks }}</td>
+                <td>{{ (click_rate * 100) | round(2, 'floor') }} %</td>
+            </tr>
+        </table>
+
+</body>
+</html>

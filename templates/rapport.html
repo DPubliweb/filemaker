@@ -1,0 +1,82 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <script src="Gradient.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Publiweb File Maker</title>
+    <script src="{{url_for('static', filename='gradient.js')}}"></script>
+    <script>
+             let play = function(){document.getElementById("audio").play()}
+    </script>
+
+    <title>Demande de rapport de campagne</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        margin-top: -60
+    }
+
+    #gradient-canvas {
+        --gradient-color-1: #b365d6;
+        --gradient-color-2: #b3cdf4;
+        --gradient-color-3: #ee343f;
+        --gradient-color-4: #fac15a;
+    }
+</style>
+
+<body>
+    <canvas id="gradient-canvas" style="width:100vw;height:50vh"></canvas>
+    <script>
+        var gradient = new Gradient()
+        gradient.initGradient('#gradient-canvas');
+    </script>
+        <script>
+            function play() {
+                var audio = document.getElementById("audio");
+                audio.play();
+            }</script>
+        <section class="section_top">
+            <div class="section-container">
+                <div class="section-layout-container container-medium with-padding">
+                    <div class="section-layout">
+                        <div class="gradient-area">
+                            <div class="gradient-title-area">
+                                <div class="text text-under text-under-blended section-title-1" style="text-align: center;">
+                                    <div class="top_page"><h1>Rapport de campagne</h1>
+                                      </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        
+    <form action="/campaign" method="post">
+        <div class="formbg-outer">
+            <div class="formbg">
+              <div class="formbg-inner padding-horizontal--48">
+            <dl>
+                <div class="field padding-bformbgottom--24">
+        <p>
+            <label for="campaign_name">Nom de la campagne:</label>
+            <input type="text" id="campaign_name" name="campaign_name" required placeholder="Nom de la campagne">
+        </p>
+
+        <p style='text-align: center;'>
+            <button type="submit" class="button-85" role="button" value="PLAY" onclick="play()">Envoyer
+            </button>
+            <audio id="audio" src="https://www.publiwebsms.com/wp-content/uploads/2022/12/Elevator-Music.mp3"></audio>
+        </p>
+    </div>
+</dl>
+</div>
+</div>
+</div>      
+    </form>
+</body>
+</html>
