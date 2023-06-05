@@ -192,25 +192,32 @@ def upload_file():
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)
             count = 0
+            # Créez une liste pour stocker les fichiers traités avec succès
+            successful_files = []
+            
             for file in filenames:
                 if (file != ".DS_Store" and file != "text.html"):
                     count = count + 1
                     print("start " + file)
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
-                    #campaign_data = {"campaign": name}
                     r = requests.post("https://aud.vc/upload-file", files=upload_file)
-        
+            
                     if r.status_code == 200:
                         print("finish parsed_" + file)
                         with open(os.path.abspath("parsed/"+file), "wb") as f:
                             f.write(r.content)
+                        successful_files.append(file)
                     else:
                         print(r.status_code)
                         print(r.content)
-        
+            
                 else:
                     print(file)
+            
+            # Affichez la liste des fichiers traités avec succès
+            print("Successful files:", successful_files)
+
             
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
