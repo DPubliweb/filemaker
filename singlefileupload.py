@@ -197,9 +197,7 @@ def upload_file():
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     campaign_data = {"campaign": name}
-                    request_url = "https://"+parseur+".vc/upload-file"
-                    print(request_url)
-                    r = requests.post("https://"+parseur+".vc/upload-file", files=upload_file)
+                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
