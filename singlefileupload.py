@@ -18,6 +18,8 @@ app=Flask(__name__, static_folder='./static', static_url_path='/')
 app.secret_key = "secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+url = 'https://aud.vc/upload-file'  # Remplacez par votre URL cible
+response = requests.get(url, allow_redirects=False)
 
 path = os.getcwd()
 # file Upload
@@ -197,7 +199,7 @@ def upload_file():
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
                     campaign_data = {"campaign": name}
-                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
+                    r = requests.post(url, files=upload_file)
         
                     if r.status_code == 200:
                         print("finish parsed_" + file)
@@ -425,7 +427,7 @@ def upload_file_lea():
                         print("start " + file)
                         sample_file = open("parsed/" + file, "rb")
                         upload_file = {"xlsxFile": sample_file}
-                        r = requests.post("https://aud.vc/upload-file", files=upload_file)
+                        r = requests.post(url, files=upload_file)
             
                         if r.status_code == 200:
                             print("finish parsed_" + file)
