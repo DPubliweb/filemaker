@@ -18,8 +18,6 @@ app=Flask(__name__, static_folder='./static', static_url_path='/')
 app.secret_key = "secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-#url = 'https://aud.vc/upload-file'  # Remplacez par votre URL cible
-#response = requests.get(url, allow_redirects=False)
 
 path = os.getcwd()
 # file Upload
@@ -110,7 +108,6 @@ def upload_file():
             #flag = int(flag_input)
             link = request.form['link']
             link_cutted = link[38:46]
-            #parseur = request.form['parseur']
 
             line_count = 0
             more_than = 0
@@ -167,67 +164,54 @@ def upload_file():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "3")
+                code = ran.replace ("0", "2")
                 line[8] = str(code)
                 line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
                
-                if count < 50000:
-                    worksheet.write(line_count, 0, line[0])
-                    worksheet.write(line_count, 1, line[1])
-                    worksheet.write(line_count, 2, line[2])
-                    worksheet.write(line_count, 3, line[3])
-                    worksheet.write(line_count, 4, line[4])
-                    worksheet.write(line_count, 5, line[5])
-                    worksheet.write(line_count, 6, line[6])
-                    worksheet.write(line_count, 7, line[7])
-                    worksheet.write(line_count, 8, line[8])
-                    worksheet.write(line_count, 9, line[9])
+                
+                worksheet.write(line_count, 0, line[0])
+                worksheet.write(line_count, 1, line[1])
+                worksheet.write(line_count, 2, line[2])
+                worksheet.write(line_count, 3, line[3])
+                worksheet.write(line_count, 4, line[4])
+                worksheet.write(line_count, 5, line[5])
+                worksheet.write(line_count, 6, line[6])
+                worksheet.write(line_count, 7, line[7])
+                worksheet.write(line_count, 8, line[8])
+                worksheet.write(line_count, 9, line[9])
                
              count = count + 1
              line_count = line_count +1
              count_str = str(count)
-            workbook.close()
+             workbook.close()
 
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             print(filenames)
             count = 0
-            # Créez une liste pour stocker les fichiers traités avec succès
-            successful_files = []
-            
             for file in filenames:
                 if (file != ".DS_Store" and file != "text.html"):
                     count = count + 1
                     print("start " + file)
                     sample_file = open("parsed/" + file, "rb")
                     upload_file = {"xlsxFile": sample_file}
-                    print('sma.vc ICI')
                     r = requests.post("https://aud.vc/upload-file", files=upload_file)
-            
+        
                     if r.status_code == 200:
                         print("finish parsed_" + file)
                         with open(os.path.abspath("parsed/"+file), "wb") as f:
                             f.write(r.content)
-                        successful_files.append(file)
                     else:
                         print(r.status_code)
                         print(r.content)
-            
+        
                 else:
                     print(file)
-            
-            # Affichez la liste des fichiers traités avec succès
-            print("Successful files:", successful_files)
-
-            
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
                 if (file != ".DS_Store" and file != "text.html" ):
-                    print(file, 'HEY')
                     read_file = pd.read_excel('parsed/'+file)
-                    print(read_file, 'HEY2')
                     file = file[:-4]
-                    print(file, 'HEY3')
                     read_file.to_csv("ready/"+file+"csv", index=None, header=True)
             print("Salut", filenames)
             print('all file finish')
@@ -333,23 +317,23 @@ def upload_file_lea():
                     ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                     code = ran.replace ("0", "2")
                     line[8] = str(code)
-                    if count < 50000 :
+                    if count < 30000 :
                        if more_than == 0:
                            line[6] = utm
                        else:
                            line[6] = utm+".p1"
-                    elif count > 50000 and count <= 100001:
+                    elif count > 30000 and count <= 60001:
                        line[6] = utm+".p2"
-                    elif count > 100001 and count <= 150001:
+                    elif count > 60001 and count <= 90000:
                         line[6] = utm+".p3"
-                    elif count > 150001 and count <= 200001:
+                    elif count > 90000 and count <= 120001:
                         line[6] = utm+".p4"
-                    elif count > 200001 and count <= 250001:
+                    elif count > 120001 and count <= 150001:
                         line[6] = utm+".p5"
     
                     line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
                    
-                    if count < 50000 :
+                    if count < 30000 :
                         worksheet.write(line_count, 0, line[0])
                         worksheet.write(line_count, 1, line[1])
                         worksheet.write(line_count, 2, line[2])
@@ -360,7 +344,7 @@ def upload_file_lea():
                         worksheet.write(line_count, 7, line[7])
                         worksheet.write(line_count, 8, line[8])
                         worksheet.write(line_count, 9, line[9])
-                    elif count > 50000 and count <= 100001:
+                    elif count > 30000 and count <= 60001:
                         worksheet1.write(line_count, 0, line[0])
                         worksheet1.write(line_count, 1, line[1])
                         worksheet1.write(line_count, 2, line[2])
@@ -370,7 +354,7 @@ def upload_file_lea():
                         worksheet1.write(line_count, 6, line[6])
                         worksheet1.write(line_count, 7, line[7])
                         worksheet1.write(line_count, 8, line[8])
-                    elif count > 100001 and count <= 150001:
+                    elif count > 60001 and count <= 90001:
                         worksheet2.write(line_count, 0, line[0])
                         worksheet2.write(line_count, 1, line[1])
                         worksheet2.write(line_count, 2, line[2])
@@ -380,7 +364,7 @@ def upload_file_lea():
                         worksheet2.write(line_count, 6, line[6])
                         worksheet2.write(line_count, 7, line[7])
                         worksheet2.write(line_count, 8, line[8])
-                    elif count > 150001 and count <= 200001:
+                    elif count > 90001 and count <= 120001:
                         worksheet3.write(line_count, 0, line[0])
                         worksheet3.write(line_count, 1, line[1])
                         worksheet3.write(line_count, 2, line[2])
@@ -390,7 +374,7 @@ def upload_file_lea():
                         worksheet3.write(line_count, 6, line[6])
                         worksheet3.write(line_count, 7, line[7])
                         worksheet3.write(line_count, 8, line[8])
-                    elif count > 200001 and count <= 250001:
+                    elif count > 120001 and count <= 150001:
                         worksheet4.write(line_count, 0, line[0])
                         worksheet4.write(line_count, 1, line[1])
                         worksheet4.write(line_count, 2, line[2])
@@ -405,21 +389,21 @@ def upload_file_lea():
                  line_count = line_count +1
                  count_str = str(count)
                 print(count)
-                if count <= 50000 :
+                if count <= 30000 :
                     workbook.close()
-                elif count > 50000 and count <= 100001:
+                elif count > 30000 and count <= 60001:
                     workbook.close()
                     workbook1.close()
-                elif count > 100001 and count <= 150001:
+                elif count > 60001 and count <= 90001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
-                elif count > 150001 and count <= 200001:
+                elif count > 90001 and count <= 120001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
                     workbook3.close()
-                elif count > 200001 and count <= 250001:
+                elif count > 120001 and count <= 150001:
                     workbook.close()
                     workbook1.close()
                     workbook2.close()
@@ -435,7 +419,7 @@ def upload_file_lea():
                         print("start " + file)
                         sample_file = open("parsed/" + file, "rb")
                         upload_file = {"xlsxFile": sample_file}
-                        r = requests.post(url, files=upload_file)
+                        r = requests.post("https://aud.vc/upload-file", files=upload_file)
             
                         if r.status_code == 200:
                             print("finish parsed_" + file)
@@ -638,7 +622,6 @@ def zipped_data_2():
                      attachment_filename=fileName,
                      as_attachment=True)
 
-
 @app.route('/sms_write', methods=['GET','POST'])
 def sms_write():
     if request.method == 'POST':
@@ -683,8 +666,6 @@ def sms_write():
                 worksheet.write(0,6,first_line[6])
                 worksheet.write(0,7,first_line[7])
                 worksheet.write(0,8,first_line[8])
-                worksheet.write(0,9,first_line[9])
-
              else:
                 if(short_url == 'aud' or short_url == 'inf'):  
                     int_counter = int(counter)
@@ -747,41 +728,6 @@ def dedouble_file():
     else:
         flash('Allowed file types are only csv')
         return redirect(request.url)
-    
-@app.route('/campaign', methods=['POST'])
-def get_campaign_clicks():
-    campaign_name = request.form['campaign_name']
-    print(campaign_name)
-    response = requests.get(f'https://aud.vc/campaign/{campaign_name}/clicks')
-    print(response)
-
-    if response.status_code == 200:
-        response_text = response.text
-        response_data = dict(line.split(': ') for line in response_text.split('\n'))
-        
-        # Now you can access the data like this:
-        clicks = response_data['Total clicks for campaign Dreamteam-0206']
-        links = response_data['Total links for campaign Dreamteam-0206']
-        click_rate = response_data['Click rate for campaign Dreamteam-0206']
-
-        clicks = int(clicks)
-        links = int(links)
-        click_rate = float(click_rate)
-    else:
-        # Handle error
-        pass
-
-    # Here you would add your logic to get data for the campaign
-    return render_template('campaign.html', 
-                           campaign_name=campaign_name, 
-                           clicks=clicks, 
-                           links=links, 
-                           click_rate=click_rate)
-
-
-@app.route('/rapport')
-def input():
-    return render_template('rapport.html')
 
 
 if __name__ == "__main__":
