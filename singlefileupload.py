@@ -189,27 +189,39 @@ def upload_file():
             workbook.close()
             
 
-            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-            print(filenames)
+            # Récupérer la liste des fichiers
+            filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]
+            
+            # Compteur pour le nombre de fichiers traités
             count = 0
+            
+            # Boucle à travers chaque fichier
             for file in filenames:
-                if (file != ".DS_Store" and file != "text.html"):
-                    count = count + 1
-                    print("start " + file)
-                    sample_file = open("parsed/" + file, "rb")
-                    upload_file = {"xlsxFile": sample_file}
-                    r = requests.post("https://aud.vc/upload-file", files=upload_file)
-        
-                    if r.status_code == 200:
-                        print("finish parsed_" + file)
-                        with open(os.path.abspath("parsed/"+file), "wb") as f:
-                            f.write(r.content)
-                    else:
-                        print(r.status_code)
-                        print(r.content)
-        
-                else:
-                    print(file)
+                if file != ".DS_Store" and file != "text.html":
+                    count += 1
+                    print(f"Start {file}")
+                    
+                    # Utiliser with pour s'assurer que le fichier est fermé après utilisation
+                    with open(os.path.join("parsed", file), "rb") as sample_file:
+                        upload_file = {"xlsxFile": sample_file}
+                        try:
+                            # Envoi de la requête avec un délai d'attente de 10 secondes
+                            r = requests.post("https://aud.vc/upload-file", files=upload_file, timeout=60)
+                            if r.status_code == 200:
+                                print(f"Finish parsed_{file}")
+                                with open(os.path.abspath(os.path.join("parsed", file)), "wb") as f:
+                                    f.write(r.content)
+                            else:
+                                print(r.status_code)
+                                print(r.content)
+                        except requests.exceptions.RequestException as e:
+                            # Gestion des exceptions de requête
+                            print(f"Error: {e}")
+            
+                    # Pause de 1 seconde entre les requêtes pour éviter la surcharge du serveur
+                    time.sleep(1)
+
+            
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
             for file in filenames:
                 if (file != ".DS_Store" and file != "text.html" ):
@@ -434,6 +446,7 @@ def upload_file_lea():
             
                     else:
                         print(file)
+                        
                 filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
                 for file in filenames:
                     if (file != ".DS_Store" and file != "text.html" ):
