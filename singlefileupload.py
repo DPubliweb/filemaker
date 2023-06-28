@@ -36,7 +36,42 @@ ALLOWED_EXTENSIONS = set(['csv','xslx'])
 
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSION
+
+gsm_to_unicode = {
+    '@': '\u0000', '£': '\u0001', '$': '\u0002', '¥': '\u0003', 'è': '\u0004',
+    'é': '\u0005', 'ù': '\u0006', 'ì': '\u0007', 'ò': '\u0008', 'Ç': '\u0009',
+    '\n': '\u000A', 'Ø': '\u000B', 'ø': '\u000C', '\r': '\u000D', 'Å': '\u000E',
+    'å': '\u000F', 'Δ': '\u0010', '_': '\u0011', 'Φ': '\u0012', 'Γ': '\u0013',
+    'Λ': '\u0014', 'Ω': '\u0015', 'Π': '\u0016', 'Ψ': '\u0017', 'Σ': '\u0018',
+    'Θ': '\u0019', 'Ξ': '\u001A', 'Æ': '\u001C', 'æ': '\u001D', 'ß': '\u001E',
+    'É': '\u001F', ' ': '\u0020', '!': '\u0021', '\"': '\u0022', '#': '\u0023',
+    '¤': '\u0024', '%': '\u0025', '&': '\u0026', '\'': '\u0027', '(': '\u0028',
+    ')': '\u0029', '*': '\u002A', '+': '\u002B', ',': '\u002C', '-': '\u002D',
+    '.': '\u002E', '/': '\u002F', '0': '\u0030', '1': '\u0031', '2': '\u0032',
+    '3': '\u0033', '4': '\u0034', '5': '\u0035', '6': '\u0036', '7': '\u0037',
+    '8': '\u0038', '9': '\u0039', ':': '\u003A', ';': '\u003B', '<': '\u003C',
+    '=': '\u003D', '>': '\u003E', '?': '\u003F', '¡': '\u0040', 'A': '\u0041',
+    'B': '\u0042', 'C': '\u0043', 'D': '\u0044', 'E': '\u0045', 'F': '\u0046',
+    'G': '\u0047', 'H': '\u0048', 'I': '\u0049', 'J': '\u004A', 'K': '\u004B',
+    'L': '\u004C', 'M': '\u004D', 'N': '\u004E', 'O': '\u004F', 'P': '\u0050',
+    'Q': '\u0051', 'R': '\u0052', 'S': '\u0053', 'T': '\u0054', 'U': '\u0055',
+    'V': '\u0056', 'W': '\u0057', 'X': '\u0058', 'Y': '\u0059', 'Z': '\u005A',
+    'Ä': '\u005B', 'Ö': '\u005C', 'Ñ': '\u005D', 'Ü': '\u005E', '§': '\u005F',
+    '¿': '\u0060', 'a': '\u0061', 'b': '\u0062', 'c': '\u0063', 'd': '\u0064',
+    'e': '\u0065', 'f': '\u0066', 'g': '\u0067', 'h': '\u0068', 'i': '\u0069',
+    'j': '\u006A', 'k': '\u006B', 'l': '\u006C', 'm': '\u006D', 'n': '\u006E',
+    'o': '\u006F', 'p': '\u0070', 'q': '\u0071', 'r': '\u0072', 's': '\u0073',
+    't': '\u0074', 'u': '\u0075', 'v': '\u0076', 'w': '\u0077', 'x': '\u0078',
+    'y': '\u0079', 'z': '\u007A', 'ä': '\u007B', 'ö': '\u007C', 'ñ': '\u007D',
+    'ü': '\u007E', 'à': '\u007F'
+}
+
+def convert_to_gsm(text):
+    # Convert to GSM 03.38
+    return "".join([gsm_to_unicode.get(char, '?') for char in text])
+
+# ...
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -666,6 +701,7 @@ def sms_write():
             lien = "{lien}"
             print(short_url)
 
+
             workbook = xlsxwriter.Workbook(os.path.abspath('final/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
 
@@ -694,8 +730,9 @@ def sms_write():
                 line[0] = line[0][0:abs_cut]
                 line[4] = line[4].replace('aud', short_url)
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0]).replace('\r\n','\n')
+                line[4] = convert_to_gsm(line[4])
                
-                if count < 50000 :
+                if count < 200001 :
                     worksheet.write(line_count, 0, line[3])
                     worksheet.write(line_count, 1, line[4])
         
