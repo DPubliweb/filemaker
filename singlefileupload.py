@@ -34,10 +34,6 @@ app.config['PARSED'] = PARSED
 
 ALLOWED_EXTENSIONS = set(['csv','xslx'])
 
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSION
-
 gsm_to_unicode = {
     '@': '\u0000', '£': '\u0001', '$': '\u0002', '¥': '\u0003', 'è': '\u0004',
     'é': '\u0005', 'ù': '\u0006', 'ì': '\u0007', 'ò': '\u0008', 'Ç': '\u0009',
@@ -71,7 +67,8 @@ def convert_to_gsm(text):
     # Convert to GSM 03.38
     return "".join([gsm_to_unicode.get(char, '?') for char in text])
 
-# ...
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods = ['GET'])
 def home():
@@ -700,7 +697,7 @@ def sms_write():
             nom = "{nom}"
             lien = "{lien}"
             print(short_url)
-
+            
 
             workbook = xlsxwriter.Workbook(os.path.abspath('final/'+name+'.xlsx'))
             worksheet = workbook.add_worksheet()
