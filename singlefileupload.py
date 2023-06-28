@@ -727,7 +727,7 @@ def sms_write():
                 line[0] = line[0][0:abs_cut]
                 line[4] = line[4].replace('aud', short_url)
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0]).replace('\r\n','\n')
-                line[4] = convert_to_gsm(line[4])
+                #line[4] = convert_to_gsm(line[4])
                
                 if count < 200001 :
                     worksheet.write(line_count, 0, line[3])
