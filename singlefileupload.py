@@ -36,7 +36,7 @@ ALLOWED_EXTENSIONS = set(['csv','xslx'])
 
 gsm_to_unicode = {
     '@': '\u0000', '£': '\u0001', '$': '\u0002', '¥': '\u0003', 'è': '\u0004',
-    'é': '\u0005', 'ù': '\u0006', 'ì': '\u0007', 'ò': '\u0008', 'Ç': '\u0009',
+    'é': '\u00E9', 'ù': '\u0006', 'ì': '\u0007', 'ò': '\u0008', 'Ç': '\u0009',
     '\n': '\u000A', 'Ø': '\u000B', 'ø': '\u000C', '\r': '\u000D', 'Å': '\u000E',
     'å': '\u000F', 'Δ': '\u0010', '_': '\u0011', 'Φ': '\u0012', 'Γ': '\u0013',
     'Λ': '\u0014', 'Ω': '\u0015', 'Π': '\u0016', 'Ψ': '\u0017', 'Σ': '\u0018',
@@ -602,38 +602,32 @@ def upload_b2b():
 
 @app.route('/zipped_data')
 def zipped_data():
-    filenames = next(walk(os.path.abspath("/ready")), (None, None, []))[2]  # [] if no file
     timestr = time.strftime("%Y%m%d-%H%M%S")
     fileName = "parsed_files{}.zip".format(timestr)
     memory_file = BytesIO()
+
     file_path = os.path.abspath("ready")
 
+    # Création de l'archive ZIP en mémoire
     with zipfile.ZipFile(memory_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
-          for root, dirs, files in os.walk(file_path):
-                    for file in files:
-                        if (file != ".DS_Store" and file != "text.html"):
-                            zipf.write(os.path.join(root, file))
-                            #os.remove(file_path)
+        for root, dirs, files in os.walk(file_path):
+            for file in files:
+                if file not in [".DS_Store", "text.html"]:
+                    zipf.write(os.path.join(root, file))
+
+    # Réinitialiser le curseur au début du fichier en mémoire
     memory_file.seek(0)
-    filenames2 = next(walk(os.path.abspath("parsed")), (None, None, []))[2]  # [] if no file
-    for file in filenames2:
-                if (file != ".DS_Store" and file != "text.html"):
-                    file_path_del_2 = (os.path.abspath("parsed/"+file))
-                    os.remove(file_path_del_2)
-    filenames3 = next(walk(os.path.abspath("uploads")), (None, None, []))[2]  # [] if no file
-    for file in filenames3:
-                if (file != ".DS_Store" and file != "text.html"):
-                    file_path_del_3 = (os.path.abspath("uploads/"+file))
-                    os.remove(file_path_del_3)
-    filenames4 = next(walk(os.path.abspath("ready")), (None, None, []))[2]  # [] if no file
-    for file in filenames4:
-                if (file != ".DS_Store" and file != "text.html"):
-                    file_path_del_4 = (os.path.abspath("ready/"+file))
-                    os.remove(file_path_del_4)
-    
-    print(memory_file)
 
+    # Suppression des fichiers
+    directories = ["parsed", "uploads", "ready"]
+    for directory in directories:
+        dir_path = os.path.abspath(directory)
+        for file in os.listdir(dir_path):
+            if file not in [".DS_Store", "text.html"]:
+                file_path = os.path.join(dir_path, file)
+                os.remove(file_path)
 
+    # Envoi de l'archive ZIP au client
     return send_file(memory_file,
                      attachment_filename=fileName,
                      as_attachment=True)
@@ -727,7 +721,7 @@ def sms_write():
                 line[0] = line[0][0:abs_cut]
                 line[4] = line[4].replace('aud', short_url)
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0]).replace('\r\n','\n')
-                #line[4] = convert_to_gsm(line[4])
+                line[4] = convert_to_gsm(line[4])
                
                 if count < 200001 :
                     worksheet.write(line_count, 0, line[3])
