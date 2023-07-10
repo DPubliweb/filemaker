@@ -126,6 +126,7 @@ def upload_file():
             return redirect(request.url)
         file = request.files['file']
         utm = request.form['utm']
+        url_shortenner = request.form ['url_shortenner']
         if file.filename == '':
             flash('No file selected for uploading')
             return redirect(request.url)
@@ -218,6 +219,7 @@ def upload_file():
              line_count = line_count +1
              count_str = str(count)
             print(count)
+            print(str(url_shortenner))
             workbook.close()
             
 
@@ -238,7 +240,7 @@ def upload_file():
                         upload_file = {"xlsxFile": sample_file}
                         try:
                             # Envoi de la requête avec un délai d'attente de 10 secondes
-                            r = requests.post("https://aud.vc/upload-file", files=upload_file, timeout=60)
+                            r = requests.post("https://"+str(url_shortenner)+"/upload-file", files=upload_file)
                             if r.status_code == 200:
                                 print(f"Finish parsed_{file}")
                                 with open(os.path.abspath(os.path.join("parsed", file)), "wb") as f:
@@ -543,6 +545,8 @@ def upload_b2b():
                 line[9] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[9]+"&address="+line[2]+"&company="+line[0]+"&email="+line[1]+"&tel_fixe="+line[6]+"&tel_mobile="+line[3]+"&website="+line[8]+"&city="+line[5]+"&zipcode="+line[7]
                
+                line[1] = line[2] = line[6] = line[8] = line[9] = ""
+                
                 if count < 50000 :
                     worksheet.write(line_count, 0, line[0])
                     worksheet.write(line_count, 1, line[1])
@@ -721,7 +725,7 @@ def sms_write():
                 line[0] = line[0][0:abs_cut]
                 line[4] = line[4].replace('aud', short_url)
                 line[4] = sms_content.replace(lien, line[4]).replace(civilite, line[5]).replace(nom, line[0]).replace('\r\n','\n')
-                line[4] = convert_to_gsm(line[4])
+                #line[4] = convert_to_gsm(line[4])
                
                 if count < 200001 :
                     worksheet.write(line_count, 0, line[3])
