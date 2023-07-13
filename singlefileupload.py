@@ -737,6 +737,11 @@ def sms_write():
             print(count)
             workbook.close()
 
+            full_path = os.path.abspath('final/'+name+'.xlsx')
+            df = pd.read_excel(full_path)
+            df[:-3].to_excel(full_path, index=False)  # overwrite the original file
+            df[-3:].to_excel(full_path.replace('.xlsx', '_last3.xlsx'), index=False)  # create new file with last 3 lines
+
         return render_template("content_sms.html")
         
     else:
