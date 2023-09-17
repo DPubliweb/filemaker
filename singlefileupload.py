@@ -198,9 +198,9 @@ def upload_file():
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
                 code = ran.replace ("0", "2")
-                line[8] = str(code)
+                line[6] = str(code)
                 #line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[6]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[8]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[8]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[6]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
                
                 if count < 50000:
                     worksheet.write(line_count, 0, line[0])
