@@ -201,6 +201,9 @@ def upload_file():
                 line[6] = str(code)
                 #line[6] = utm
                 line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[8]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[6]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
+
+                
+
                
                 if count < 50000:
                     worksheet.write(line_count, 0, line[0])
@@ -225,6 +228,7 @@ def upload_file():
 
             # Récupérer la liste des fichiers
             filenames = next(walk(os.path.abspath("parsed")), (None, None, []))[2]
+            prefixes = ["aud.vc", "avn.vc", "cli.vc", "lna.vc", "mss.vc", "nah.vc", "zer.vc", "sul.vc", "saa.vc"]
             
             # Compteur pour le nombre de fichiers traités
             count = 0
@@ -245,6 +249,13 @@ def upload_file():
                                 print(f"Finish parsed_{file}")
                                 with open(os.path.abspath(os.path.join("parsed", file)), "wb") as f:
                                     f.write(r.content)
+                                df = pd.read_excel("parsed_" + file)
+                                # Remplacer le préfixe
+                                df.iloc[:, 4] = df.iloc[:, 4].apply(lambda x: x.replace("aud.vc", random.choice(prefixes)))
+                                # Supprimer la deuxième ligne (l'indexation commence à 0, donc 1 est la deuxième ligne)
+                                df = df.drop(0, axis=0)
+                                # Enregistrer le DataFrame modifié dans le fichier Excel
+                                df.to_excel("parsed_" + file, index=False)
                             else:
                                 print(r.status_code)
                                 print(r.content)
