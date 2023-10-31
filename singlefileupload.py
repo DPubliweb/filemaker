@@ -239,29 +239,34 @@ def upload_file():
                     count += 1
                     print(f"Start {file}")
                     
-                    # Utiliser with pour s'assurer que le fichier est fermé après utilisation
-                    with open(os.path.join("parsed", file), "rb") as sample_file:
-                        upload_file = {"xlsxFile": sample_file}
-                        try:
-                            # Envoi de la requête avec un délai d'attente de 10 secondes
-                            r = requests.post("https://"+str(url_shortenner)+"/upload-file", files=upload_file)
-                            if r.status_code == 200:
-                                print(f"Finish parsed_{file}")
-                                with open(os.path.abspath(os.path.join("parsed", file)), "wb") as f:
-                                    f.write(r.content)
-                                df = pd.read_excel( file)
-                                # Remplacer le préfixe
-                                df.iloc[:, 4] = df.iloc[:, 4].apply(lambda x: x.replace("aud.vc", random.choice(prefixes)))
-                                # Supprimer la deuxième ligne (l'indexation commence à 0, donc 1 est la deuxième ligne)
-                                df = df.drop(0, axis=0)
-                                # Enregistrer le DataFrame modifié dans le fichier Excel
-                                df.to_excel("parsed_" + file, index=False)
-                            else:
-                                print(r.status_code)
-                                print(r.content)
-                        except requests.exceptions.RequestException as e:
-                            # Gestion des exceptions de requête
-                            print(f"Error: {e}")
+            with open(os.path.join("parsed", file), "rb") as sample_file:
+                upload_file = {"xlsxFile": sample_file}
+                try:
+                    # Envoi de la requête avec un délai d'attente de 10 secondes
+                    r = requests.post("https://" + str(url_shortenner) + "/upload-file", files=upload_file)
+                    if r.status_code == 200:
+                        print(f"Finish parsed_{file}")
+                        # Utilisez un nouveau nom de fichier pour le fichier téléchargé pour éviter toute confusion
+                        downloaded_file_path = os.path.abspath(os.path.join("parsed", "downloaded_" + file))
+                        with open(downloaded_file_path, "wb") as f:
+                            f.write(r.content)
+                        # Lire le fichier que vous venez d'écrire
+                        df = pd.read_excel(downloaded_file_path)
+                        df.iloc[:, 4] = df.iloc[:, 4].apply(lambda x: x.replace("aud.vc", random.choice(prefixes)))
+                        # Supprimer la deuxième ligne (l'indexation commence à 0, donc 1 est la deuxième ligne)
+                        df = df.drop(0, axis=0)
+                        # Enregistrer le DataFrame modifié dans le fichier Excel
+                        df.to_excel("parsed_" + file, index=False)
+                        # ... Le reste de votre code pour modifier le DataFrame ...
+                        # Sauvegardez le DataFrame modifié avec le préfixe "parsed_"
+                        modified_file_path = os.path.join("parsed", "parsed_" + file)
+                        df.to_excel(modified_file_path, index=False)
+                    else:
+                        print(r.status_code)
+                        print(r.content)
+                except requests.exceptions.RequestException as e:
+                    # Gestion des exceptions de requête
+                    print(f"Error: {e}")
             
                     # Pause de 1 seconde entre les requêtes pour éviter la surcharge du serveur
                     time.sleep(1)
