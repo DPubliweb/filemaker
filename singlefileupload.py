@@ -249,7 +249,7 @@ def upload_file():
                                 print(f"Finish parsed_{file}")
                                 with open(os.path.abspath(os.path.join("parsed", file)), "wb") as f:
                                     f.write(r.content)
-                                df = pd.read_excel("parsed_" + file)
+                                df = pd.read_excel( file)
                                 # Remplacer le préfixe
                                 df.iloc[:, 4] = df.iloc[:, 4].apply(lambda x: x.replace("aud.vc", random.choice(prefixes)))
                                 # Supprimer la deuxième ligne (l'indexation commence à 0, donc 1 est la deuxième ligne)
