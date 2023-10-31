@@ -262,9 +262,9 @@ def upload_file():
                         modified_file_path = os.path.join("parsed", "parsed_" + file)
                         df.to_excel(modified_file_path, index=False)
                         os.remove(os.path.join("parsed", file))  # Supprime le fichier source
-                        parsed_file_path = os.path.join("parsed", "parsed_" + file)
-                        if os.path.exists(parsed_file_path):  # Vérifie si le fichier "parsed_" existe avant de tenter de le supprimer
-                            os.remove(parsed_file_path)  # Supprime le fichier "parsed_"
+                        parsed_file_path = os.path.join("parsed", "downloaded_" + file)
+                        if os.path.exists(parsed_file_path):  # Vérifie si le fichier "downloaded_" existe avant de tenter de le supprimer
+                            os.remove(parsed_file_path)  # Supprime le fichier "downloaded_"
                     else:
                         print(r.status_code)
                         print(r.content)
