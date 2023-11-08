@@ -162,6 +162,7 @@ def upload_file():
                 worksheet.write(0,7, first_line[7])
                 worksheet.write(0,8, first_line[8])
                 worksheet.write(0,9, first_line[9])
+                worksheet.write(0,10, first_line[10])
 
              else:
                 if line[5] == 'Mme':
@@ -197,10 +198,10 @@ def upload_file():
                 # call random.choices() string module to find the string in Uppercase + numeric data.
         
                 ran = ''.join(random.choices(string.ascii_uppercase + string.digits, k=S))
-                code = ran.replace ("0", "2")
+                code = ran.replace ("0", "1")
                 line[6] = str(code)
                 #line[6] = utm
-                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[8]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[6]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]
+                line[4] = "https://contact788081.typeform.com/to/"+link_cutted+"?utm_source="+line[8]+"&prenom="+line[1]+"&nom="+line[0]+"&email="+line[2]+"&telephone="+line[3]+"&code="+line[6]+"&civilite="+line[5]+"&code_postal="+line[7]+"&cohort="+line[9]+"&analytics="+line[10]
 
                 
 
